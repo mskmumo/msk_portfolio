@@ -48,10 +48,10 @@ const data: Project[] = [
       { label: "Time-to-insight", value: "-40%" },
       { label: "Stakeholder NPS", value: "+30" },
     ],
-    coverImage: "/images/projects/power-bi-cover.jpg",
+    coverImage: "/images/projects/powerbi_1.jpg",
     gallery: [
-      { src: "/images/projects/power-bi-1.jpg", alt: "Dashboard overview" },
-      { src: "/images/projects/power-bi-2.jpg", alt: "Cohort analysis" },
+      { src: "/images/projects/powerbi_1.jpg", alt: "Dashboard overview" },
+      { src: "/images/projects/powerbi_2.jpg", alt: "Cohort analysis" },
     ],
     problem: "Leaders lacked a single source of truth for sales KPIs.",
     approach:
@@ -72,7 +72,7 @@ const data: Project[] = [
     tech: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
     tags: ["Web", "Frontend", "Design"],
     metrics: [{ label: "Lighthouse", value: ">= 95" }],
-    coverImage: "/images/projects/next-analytics-cover.jpg",
+    coverImage: "/images/projects/powerbi_2.jpg",
     problem: "Needed engaging, accessible data visuals for stakeholders.",
     approach: "Implemented SSG/ISR, lazy-loaded charts, and motion patterns.",
     solution: "Clear IA, responsive layout, and cohesive motion system.",

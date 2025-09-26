@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { XMarkIcon, MapPinIcon, EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -137,19 +138,28 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 {/* Social Media Links */}
                 <div className="flex space-x-4">
                   {[
-                    { name: "LinkedIn", href: "https://linkedin.com/in/mumo-mwangangi", icon: "💼" },
-                    { name: "GitHub", href: "https://github.com/mumorealg", icon: "💻" },
-                    { name: "Twitter", href: "https://twitter.com/mumorealg", icon: "🐦" },
-                    { name: "Email", href: "mailto:mumo@example.com", icon: "📧" },
+                    { name: "LinkedIn", href: "https://linkedin.com/in/mumo-mwangangi", icon: "/icons/linkedin-logo.png" },
+                    { name: "GitHub", href: "https://github.com/mumorealg", icon: "/icons/github-logo.png" },
+                    { name: "Instagram", href: "https://instagram.com/mumorealg", icon: "/icons/instagram-logo.gif" },
+                    { name: "Twitter", href: "https://twitter.com/mumorealg", icon: "/icons/x-logo.png" },
+                    { name: "Email", href: "mailto:mumo@example.com", icon: "/icons/gmail-logo.png" },
                   ].map((social) => (
                     <a
                       key={social.name}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center text-xl transition-all duration-200 hover:scale-110"
+                      className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all duration-200 hover:scale-110 p-2"
+                      title={social.name}
                     >
-                      {social.icon}
+                      <Image
+                        src={social.icon}
+                        alt={`${social.name} icon`}
+                        width={24}
+                        height={24}
+                        className="w-6 h-6 object-contain"
+                        unoptimized={social.icon.endsWith('.gif')}
+                      />
                     </a>
                   ))}
                 </div>

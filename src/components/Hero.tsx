@@ -38,7 +38,7 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Link 
-                href="/contact" 
+                href="#contact" 
                 className="inline-flex items-center justify-center rounded-full px-8 py-4 bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl" 
                 onClick={() => trackEvent("cta_click", { location: "hero", label: "say_hello" })}
               >

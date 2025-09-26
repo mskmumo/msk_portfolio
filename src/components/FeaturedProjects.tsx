@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllProjects } from "@/lib/projects";
+import { getAllProjects, Project } from "@/lib/projects";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -11,7 +11,7 @@ export function FeaturedProjects() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [timeLeft, setTimeLeft] = useState(4); // 4 seconds timer
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Auto-play functionality with timer
@@ -62,7 +62,7 @@ export function FeaturedProjects() {
     setTimeLeft(4);
   };
 
-  const openModal = (project: any) => {
+  const openModal = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
     setIsAutoPlaying(false);
@@ -196,7 +196,7 @@ export function FeaturedProjects() {
                     {/* Project Details - Simplified */}
                     <div className="space-y-2">
                       <div className="flex flex-wrap gap-1">
-                        {currentProject.tags.slice(0, 3).map((tag) => (
+                        {currentProject.tags.slice(0, 3).map((tag: string) => (
                           <span
                             key={tag}
                             className="text-xs rounded-full px-2 py-1 bg-primary/10 text-primary border border-primary/20 font-medium"
@@ -366,7 +366,7 @@ export function FeaturedProjects() {
                     {/* Project Details */}
                     <div className="space-y-4">
                       <div className="flex flex-wrap gap-2">
-                        {selectedProject.tags.map((tag) => (
+                        {selectedProject.tags.map((tag: string) => (
                           <span
                             key={tag}
                             className="text-sm rounded-full px-3 py-1 bg-primary/10 text-primary border border-primary/20 font-medium"
@@ -387,7 +387,7 @@ export function FeaturedProjects() {
                       <div>
                         <h4 className="text-sm font-semibold text-foreground mb-2">Technologies</h4>
                         <div className="flex flex-wrap gap-2">
-                          {selectedProject.tech.map((tech) => (
+                          {selectedProject.tech.map((tech: string) => (
                             <span
                               key={tech}
                               className="text-xs rounded-full px-3 py-1 bg-secondary/10 text-secondary border border-secondary/20 font-medium"
@@ -403,7 +403,7 @@ export function FeaturedProjects() {
                         <div>
                           <h4 className="text-sm font-semibold text-foreground mb-2">Impact</h4>
                           <div className="grid grid-cols-2 gap-4">
-                            {selectedProject.metrics.map((metric, index) => (
+                            {selectedProject.metrics.map((metric: { value: string; label: string }, index: number) => (
                               <div key={index} className="text-center p-3 bg-background rounded-lg border border-border">
                                 <div className="text-lg font-bold text-primary">{metric.value}</div>
                                 <div className="text-xs text-neutral-600 dark:text-neutral-300">{metric.label}</div>

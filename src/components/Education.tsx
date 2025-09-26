@@ -4,51 +4,65 @@ import { motion } from "framer-motion";
 
 const education = [
   {
-    degree: "Bachelor of Science in Computer Science",
-    institution: "University of Nairobi",
-    period: "2016 - 2020",
-    location: "Nairobi, Kenya",
-    description: "Focused on software engineering, data structures, algorithms, and web development. Graduated with honors.",
-    achievements: [
-      "Graduated Magna Cum Laude (GPA: 3.8/4.0)",
-      "President of Computer Science Society",
-      "Winner of Annual Hackathon 2019"
-    ],
-    coursework: ["Data Structures", "Algorithms", "Database Systems", "Software Engineering", "Web Development", "Machine Learning"]
+    degree: "Bachelor of Business Information Technology",
+institution: "Strathmore University",
+period: "2024 – Present",
+location: "Nairobi, Kenya",
+description: "Focused on business technology, project management, networking, database systems, and information systems.",
+achievements: [
+  "Designed and documented a full project charter covering scope, objectives, deliverables, and risks as part of the Project Management unit",
+  "Developed a blockchain-based information system prototype for secure data management",
+  "Applied advanced database concepts, including database security, optimization, and implementation of advanced features",
+  "Configured and managed networking solutions, including setup, troubleshooting, and performance optimization in simulated enterprise environments"
+],
+coursework: [
+  "Project Management",
+  "Networking",
+  "Database Systems",
+  "Software Engineering",
+  "Information Systems",
+  "Data Analytics"
+]
   },
   {
-    degree: "Full Stack Web Development Bootcamp",
-    institution: "FreeCodeCamp",
-    period: "2018",
-    location: "Online",
-    description: "Intensive program covering modern web development technologies and best practices.",
-    achievements: [
-      "Completed 300+ hours of coursework",
-      "Built 5 full-stack projects",
-      "Earned all certifications"
-    ],
-    coursework: ["HTML/CSS", "JavaScript", "React", "Node.js", "MongoDB", "Git"]
-  }
+  degree: "Diploma in Business Information Technology",
+institution: "Strathmore University",
+period: "2023 – 2024",
+location: "Nairobi, Kenya",
+description: "Comprehensive diploma program focused on programming, web development, information systems, and business applications. Graduated with Distinction.",
+achievements: [
+  "Graduated with Distinction",
+  "Built foundational projects in web development and business applications",
+  "Developed strong practical skills in programming and database design"
+],
+coursework: [
+  "Programming",
+  "Web Development",
+  "Information Systems",
+  "Business Applications",
+  "Database Design"
+]
+  },
 ];
 
 const certifications = [
   {
-    name: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services",
+    name: "Web Developer Certification",
+    issuer: "Strathmore University",
     date: "2023",
-    credentialId: "AWS-CSA-2023-001"
+    credentialId: "DIP2024/165437"
   },
   {
-    name: "Google Analytics Certified",
-    issuer: "Google",
-    date: "2022",
-    credentialId: "GA-CERT-2022-456"
+    name: "IBM Analytics Certified",
+    issuer: "IBM",
+    date: "2023",
+    credentialId: "Mumo Mwanagangi"
   },
   {
-    name: "React Developer Certification",
-    issuer: "Meta",
-    date: "2021",
-    credentialId: "META-REACT-2021-789"
+    name: "Diploma in Business Information Technology",
+    issuer: "Strathmore University",
+    date: "2024",
+    credentialId: "DIP2024/165437"
   }
 ];
 
