@@ -119,9 +119,14 @@ export async function POST(req: NextRequest) {
 
     // Check if SMTP is configured
     if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error("SMTP Configuration Missing:", {
+        host: process.env.SMTP_HOST ? 'SET' : 'MISSING',
+        user: process.env.SMTP_USER ? 'SET' : 'MISSING',
+        pass: process.env.SMTP_PASS ? 'SET' : 'MISSING'
+      });
       console.log("Contact submission (SMTP not configured):", parsed.data);
       return NextResponse.json({ 
-        error: "Email service not configured. Please try again later." 
+        error: "Email service is temporarily unavailable. Please contact me directly at +254 110 018 735 or mskmumo@gmail.com" 
       }, { status: 500 });
     }
 
@@ -239,9 +244,21 @@ For urgent matters, call me at +254 110 018 735
           pass: process.env.SMTP_PASS ? 'SET' : 'NOT SET'
         }
       });
+      
+      // Provide helpful error message based on error type
+      let userMessage = "Failed to send email. Please try again or contact me directly at +254 110 018 735";
+      
+      if (emailError instanceof Error) {
+        if (emailError.message.includes('authentication') || emailError.message.includes('login')) {
+          userMessage = "Email authentication failed. Please contact me directly at +254 110 018 735 or mskmumo@gmail.com";
+        } else if (emailError.message.includes('network') || emailError.message.includes('timeout')) {
+          userMessage = "Network error occurred. Please try again in a moment or contact me at +254 110 018 735";
+        }
+      }
+      
       return NextResponse.json({ 
-        error: "Failed to send email. Please try again or contact me directly.",
-        details: emailError instanceof Error ? emailError.message : 'Unknown error'
+        error: userMessage,
+        details: process.env.NODE_ENV === 'development' ? (emailError instanceof Error ? emailError.message : 'Unknown error') : undefined
       }, { status: 500 });
     }
 
