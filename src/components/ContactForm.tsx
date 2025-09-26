@@ -13,6 +13,9 @@ export function ContactForm() {
     const payload: ContactInput = {
       name: String(formData.get("name") || ""),
       email: String(formData.get("email") || ""),
+      phone: String(formData.get("phone") || ""),
+      budget: String(formData.get("budget") || ""),
+      subject: String(formData.get("subject") || ""),
       message: String(formData.get("message") || ""),
       website: String(formData.get("website") || ""),
     };
@@ -50,6 +53,23 @@ export function ContactForm() {
           <input id="email" name="email" type="email" required className="h-11 px-3 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent" />
         </div>
       </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="phone" className="text-sm font-medium">Phone</label>
+          <input id="phone" name="phone" type="tel" required placeholder="+254 700 000 000" className="h-11 px-3 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="budget" className="text-sm font-medium">Budget</label>
+          <input id="budget" name="budget" required placeholder="KSh 500,000 - KSh 1,000,000" className="h-11 px-3 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent" />
+        </div>
+      </div>
+      
+      <div className="flex flex-col gap-1">
+        <label htmlFor="subject" className="text-sm font-medium">Subject</label>
+        <input id="subject" name="subject" required placeholder="Project Type" className="h-11 px-3 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent" />
+      </div>
+      
       <div className="flex flex-col gap-1">
         <label htmlFor="message" className="text-sm font-medium">Message</label>
         <textarea id="message" name="message" required rows={6} className="px-3 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-transparent" />

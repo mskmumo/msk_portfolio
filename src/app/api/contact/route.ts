@@ -16,7 +16,14 @@ const createTransporter = () => {
 };
 
 // Email template function
-const createEmailTemplate = (data: any) => {
+const createEmailTemplate = (data: {
+  name: string;
+  email: string;
+  phone: string;
+  budget: string;
+  subject: string;
+  message: string;
+}) => {
   return {
     subject: `New Contact Form Submission from ${data.name}`,
     html: `

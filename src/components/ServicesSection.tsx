@@ -225,7 +225,7 @@ export function ServicesSection() {
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Let's Discuss Your Project
+            Let&apos;s Discuss Your Project
           </motion.a>
         </motion.div>
       </div>
