@@ -38,7 +38,7 @@ export function AboutSection() {
             {/* Social links */}
             <div className="flex justify-center space-x-4">
               {[
-                { name: "LinkedIn", href: "www.linkedin.com/in/mumo-mwangangi-6750b027a", icon: "/icons/linkedin-logo.png" },
+                { name: "LinkedIn", href: "https://www.linkedin.com/in/mumo-mwangangi-6750b027a", icon: "/icons/linkedin-logo.png" },
                 { name: "GitHub", href: "https://github.com/mskmumo", icon: "/icons/github-logo.png" },
                 { name: "Instagram", href: "https://instagram.com/mumo_realg", icon: "/icons/instagram-logo.gif" },
                 { name: "Twitter", href: "https://twitter.com/mumorealg", icon: "/icons/x-logo.png" },
@@ -123,6 +123,7 @@ export function AboutSection() {
               <div className="flex flex-wrap gap-3">
                 {[
                   "Power BI",
+                  "Laravel (PHP)",
                   "Next.js",
                   "TypeScript",
                   "Tailwind CSS",

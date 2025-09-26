@@ -5,64 +5,99 @@ import { motion } from "framer-motion";
 const education = [
   {
     degree: "Bachelor of Business Information Technology",
-institution: "Strathmore University",
-period: "2024 – Present",
-location: "Nairobi, Kenya",
-description: "Focused on business technology, project management, networking, database systems, and information systems.",
-achievements: [
-  "Designed and documented a full project charter covering scope, objectives, deliverables, and risks as part of the Project Management unit",
-  "Developed a blockchain-based information system prototype for secure data management",
-  "Applied advanced database concepts, including database security, optimization, and implementation of advanced features",
-  "Configured and managed networking solutions, including setup, troubleshooting, and performance optimization in simulated enterprise environments"
-],
-coursework: [
-  "Project Management",
-  "Networking",
-  "Database Systems",
-  "Software Engineering",
-  "Information Systems",
-  "Data Analytics"
-]
+    institution: "Strathmore University",
+    period: "2024 – Present",
+    location: "Nairobi, Kenya",
+    description: "Focused on business technology, data analytics, project management, networking, database systems, and information systems with emphasis on business intelligence solutions.",
+    achievements: [
+      "Designed and documented a full project charter covering scope, objectives, deliverables, and risks as part of the Project Management unit",
+      "Developed a blockchain-based information system prototype for secure data management",
+      "Created comprehensive data analytics projects using Power BI, including interactive dashboards and KPI tracking systems",
+      "Applied advanced database concepts, including database security, optimization, and implementation of advanced features",
+      "Built predictive models and statistical analysis reports for business decision-making",
+      "Configured and managed networking solutions, including setup, troubleshooting, and performance optimization in simulated enterprise environments"
+    ],
+    coursework: [
+      "Data Analytics & Visualization",
+      "Business Intelligence",
+      "Statistical Analysis",
+      "Project Management",
+      "Database Systems",
+      "Software Engineering",
+      "Information Systems",
+      "Networking",
+      "Power BI Development",
+      "SQL & Data Mining"
+    ]
   },
   {
-  degree: "Diploma in Business Information Technology",
-institution: "Strathmore University",
-period: "2023 – 2024",
-location: "Nairobi, Kenya",
-description: "Comprehensive diploma program focused on programming, web development, information systems, and business applications. Graduated with Distinction.",
-achievements: [
-  "Graduated with Distinction",
-  "Built foundational projects in web development and business applications",
-  "Developed strong practical skills in programming and database design"
-],
-coursework: [
-  "Programming",
-  "Web Development",
-  "Information Systems",
-  "Business Applications",
-  "Database Design"
-]
+    degree: "Diploma in Business Information Technology",
+    institution: "Strathmore University",
+    period: "2023 – 2024",
+    location: "Nairobi, Kenya",
+    description: "Comprehensive diploma program focused on programming, web development, data analysis, information systems, and business applications. Graduated with Distinction.",
+    achievements: [
+      "Graduated with Distinction",
+      "Built foundational projects in web development and business applications",
+      "Completed data analysis projects using Excel and basic statistical methods",
+      "Developed strong practical skills in programming and database design",
+      "Created business reports and presentations based on data insights"
+    ],
+    coursework: [
+      "Programming Fundamentals",
+      "Web Development",
+      "Data Analysis Basics",
+      "Information Systems",
+      "Business Applications",
+      "Database Design",
+      "Excel Analytics",
+      "Report Writing"
+    ]
   },
+  {
+    degree: "Data Analytics Fundamentals Course",
+    institution: "Online Certification Platform",
+    period: "2024",
+    location: "Remote",
+    description: "Specialized course focused on data analytics fundamentals, statistical analysis, and data visualization techniques using modern tools and methodologies.",
+    achievements: [
+      "Completed comprehensive data analytics fundamentals program",
+      "Gained hands-on experience with data cleaning and preprocessing techniques",
+      "Applied statistical analysis methods to real-world datasets",
+      "Created interactive data visualizations and dashboards",
+      "Learned advanced Excel functions and Power Query for data manipulation"
+    ],
+    coursework: [
+      "Data Analytics Fundamentals",
+      "Statistical Analysis Methods",
+      "Data Visualization Techniques",
+      "Excel Advanced Analytics",
+      "Power Query & Power Pivot",
+      "Data Cleaning & Preprocessing",
+      "Exploratory Data Analysis",
+      "Dashboard Design Principles"
+    ]
+  }
 ];
 
 const certifications = [
   {
-    name: "Web Developer Certification",
-    issuer: "Strathmore University",
-    date: "2023",
-    credentialId: "DIP2024/165437"
-  },
-  {
     name: "IBM Analytics Certified",
     issuer: "IBM",
     date: "2023",
-    credentialId: "Mumo Mwanagangi"
+    credentialId: "Mumo Mwangangi"
+  },
+  {
+    name: "Web Developer Certification",
+    issuer: "Strathmore University",
+    date: "2023",
+    credentialId: "DIP2024"
   },
   {
     name: "Diploma in Business Information Technology",
     issuer: "Strathmore University",
     date: "2024",
-    credentialId: "DIP2024/165437"
+    credentialId: "DIP2024"
   }
 ];
 

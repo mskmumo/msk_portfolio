@@ -26,9 +26,31 @@ export function Hero() {
                 <span className="text-primary">Mumo Mwangangi</span>
               </h1>
               <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl leading-relaxed">
-                I&apos;m a Business Intelligence and Software Engineer based in Kenya. I strive to build 
-                immersive and beautiful web applications through carefully crafted code and user-centric design.
+                I&apos;m a Software Developer and Data Analyst based in Kenya. I bridge the gap between code and insights, 
+                building intelligent applications while transforming complex data into strategic business solutions that drive measurable impact.
               </p>
+              
+              <div className="bg-card-bg border border-border rounded-xl p-6 space-y-4">
+                <h3 className="text-lg font-semibold text-foreground">What Sets Me Apart:</h3>
+                <ul className="space-y-3 text-neutral-600 dark:text-neutral-300">
+                  <li className="flex items-start space-x-3">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Unique blend of software engineering rigor and analytical thinking</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Strong communication skills for translating technical concepts to stakeholders</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Passion for continuous learning and adopting emerging technologies</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Creative problem-solving with a focus on delivering measurable business value</span>
+                  </li>
+                </ul>
+              </div>
             </motion.div>
 
             <motion.div

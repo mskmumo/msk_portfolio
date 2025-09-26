@@ -8,7 +8,7 @@ html {
   /* Light Mode Palette - Neo Mint + Teal (Fresh & Modern) */
   --background: #F9FAFB;     /* soft white/gray for readability */
   --foreground: #111827;     /* almost black for strong contrast */
-  --neutral: #6B7280;        /* muted gray for less emphasis */
+  --neutral: #374151;        /* darker gray for better readability in light mode */
   --card-bg: #FFFFFF;        /* white with subtle shadow */
   --border: #E5E7EB;         /* light gray for clean separation */
   

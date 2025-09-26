@@ -14,7 +14,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    location: "",
+    phone: "",
     budget: "",
     subject: "",
     message: ""
@@ -40,26 +40,28 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         // Reset form
         setFormData({
           name: "",
           email: "",
-          location: "",
+          phone: "",
           budget: "",
           subject: "",
           message: ""
         });
         // Close modal
         onClose();
-        // You could add a success notification here
-        alert("Thank you for your message! I'll get back to you soon.");
+        // Show success message
+        alert(`✅ ${data.message || "Thank you for your message! I'll get back to you soon."}`);
       } else {
-        throw new Error('Failed to send message');
+        throw new Error(data.error || 'Failed to send message');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert("Sorry, there was an error sending your message. Please try again.");
+      alert(`❌ Sorry, there was an error sending your message. Please try again or contact me directly at +254 110 018 735`);
     }
   };
 
@@ -70,19 +72,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4"
           onClick={onClose}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-card-bg rounded-2xl shadow-2xl border border-border max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-card-bg rounded-xl sm:rounded-2xl shadow-2xl border border-border max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b border-border">
-              <h2 className="text-2xl font-bold text-foreground">Let&apos;s discuss your Project</h2>
+            <div className="flex justify-between items-center p-4 sm:p-6 border-b border-border">
+              <h2 className="text-lg sm:text-2xl font-bold text-foreground">Let&apos;s discuss your Project</h2>
               <button
                 onClick={onClose}
                 className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
@@ -92,64 +94,64 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </button>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-0">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0">
               {/* Left Column - Contact Information */}
-              <div className="p-8 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <div className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 order-2 lg:order-1">
                 <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Let&apos;s discuss your Project</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4">Let&apos;s discuss your Project</h3>
                   <p className="text-neutral-600 dark:text-neutral-300">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
                   </p>
                 </div>
 
                 {/* Contact Details */}
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center space-x-4 p-4 bg-card-bg rounded-xl border border-border">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <MapPinIcon className="w-6 h-6 text-primary" />
+                <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                  <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-card-bg rounded-lg sm:rounded-xl border border-border">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPinIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300">Address</p>
-                      <p className="font-medium text-foreground">Nairobi, Kenya</p>
+                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">Address</p>
+                      <p className="text-sm sm:text-base font-medium text-foreground">Nairobi, Kenya</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4 p-4 bg-card-bg rounded-xl border border-border">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <EnvelopeIcon className="w-6 h-6 text-primary" />
+                  <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-card-bg rounded-lg sm:rounded-xl border border-border">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                        <EnvelopeIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">My Email</p>
+                        <p className="text-sm sm:text-base font-medium text-foreground break-all">mskmumo@gmail.com</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300">My Email</p>
-                      <p className="font-medium text-foreground">mumo@example.com</p>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center space-x-4 p-4 bg-card-bg rounded-xl border border-border">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <PhoneIcon className="w-6 h-6 text-primary" />
+                  <div className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-card-bg rounded-lg sm:rounded-xl border border-border">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <PhoneIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300">Call Me Now</p>
-                      <p className="font-medium text-foreground">+254 110 018 735</p>
+                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">Call Me Now</p>
+                      <p className="text-sm sm:text-base font-medium text-foreground">+254 110 018 735</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Social Media Links */}
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-3 sm:gap-4">
                   {[
-                    { name: "LinkedIn", href: "https://linkedin.com/in/mumo-mwangangi", icon: "/icons/linkedin-logo.png" },
-                    { name: "GitHub", href: "https://github.com/mumorealg", icon: "/icons/github-logo.png" },
+                    { name: "LinkedIn", href: "https://www.linkedin.com/in/mumo-mwangangi-6750b027a", icon: "/icons/linkedin-logo.png" },
+                    { name: "GitHub", href: "https://github.com/mskmumo", icon: "/icons/github-logo.png" },
                     { name: "Instagram", href: "https://instagram.com/mumorealg", icon: "/icons/instagram-logo.gif" },
                     { name: "Twitter", href: "https://twitter.com/mumorealg", icon: "/icons/x-logo.png" },
-                    { name: "Email", href: "mailto:mumo@example.com", icon: "/icons/gmail-logo.png" },
+                    { name: "Email", href: "mailto:mskmumo@gmail.com", icon: "/icons/gmail-logo.png" },
                   ].map((social) => (
                     <a
                       key={social.name}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all duration-200 hover:scale-110 p-2"
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all duration-200 hover:scale-110 p-2"
                       title={social.name}
                     >
                       <Image
@@ -157,7 +159,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         alt={`${social.name} icon`}
                         width={24}
                         height={24}
-                        className="w-6 h-6 object-contain"
+                        className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
                         unoptimized={social.icon.endsWith('.gif')}
                       />
                     </a>
@@ -166,14 +168,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
 
               {/* Right Column - Contact Form */}
-              <div className="p-8">
-                <div className="mb-6">
+              <div className="p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
+                <div className="mb-4 sm:mb-6">
                   <p className="text-neutral-600 dark:text-neutral-300">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   {/* Name Field */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
@@ -186,7 +188,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="Your Name"
                     />
                   </div>
@@ -203,29 +205,30 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors text-sm sm:text-base"
                       placeholder="your.email@example.com"
                     />
                   </div>
 
-                  {/* Location Field */}
+                  {/* Phone Field */}
                   <div>
-                    <label htmlFor="location" className="block text-sm font-medium text-foreground mb-2">
-                      Location
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                      Phone Number *
                     </label>
                     <input
-                      type="text"
-                      id="location"
-                      name="location"
-                      value={formData.location}
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors"
-                      placeholder="Your Location"
+                      required
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors text-sm sm:text-base"
+                      placeholder="+254 700 000 000"
                     />
                   </div>
 
                   {/* Budget and Subject Fields */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="budget" className="block text-sm font-medium text-foreground mb-2">
                         Budget *
@@ -237,8 +240,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         value={formData.budget}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors"
-                        placeholder="$5,000 - $10,000"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors text-sm sm:text-base"
+                        placeholder="KSh 500,000 - KSh 1,000,000"
                       />
                     </div>
                     <div>
@@ -252,7 +255,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors text-sm sm:text-base"
                         placeholder="Project Type"
                       />
                     </div>
@@ -269,8 +272,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       value={formData.message}
                       onChange={handleInputChange}
                       required
-                      rows={4}
-                      className="w-full px-4 py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors resize-none"
+                      rows={3}
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-neutral-200 dark:border-neutral-700 bg-transparent focus:border-primary focus:outline-none transition-colors resize-none text-sm sm:text-base"
                       placeholder="Tell me about your project..."
                     />
                   </div>
@@ -278,7 +281,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-primary text-white py-4 px-6 rounded-xl font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                    className="w-full bg-primary text-white py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 text-sm sm:text-base"
                   >
                     <span>Submit</span>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

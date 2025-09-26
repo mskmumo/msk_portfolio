@@ -4,43 +4,46 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    title: "Senior Full Stack Developer",
-    company: "Tech Solutions Inc.",
-    period: "2022 - Present",
-    location: "Remote",
-    description: "Leading development of scalable web applications using React, Next.js, and Node.js. Mentoring junior developers and architecting cloud-based solutions.",
+    title: "Business Intelligence Developer",
+    company: "Strathmore University",
+    period: "2025 - Present",
+    location: "Nairobi, Kenya",
+    description: "Developing comprehensive business intelligence solutions using Power BI and data analytics. Creating interactive dashboards and reports that drive data-driven decision making for various clients.",
     achievements: [
-      "Increased application performance by 40% through optimization",
-      "Led a team of 5 developers on multiple projects",
-      "Implemented CI/CD pipelines reducing deployment time by 60%"
+      "Built  interactive Power BI dashboards for different business domains",
+      "Implemented automated data pipelines reducing manual reporting time by 70%",
+      "Designed KPI tracking systems that improved business performance visibility",
+      "Delivered training sessions on Power BI best practices to client teams"
     ],
-    technologies: ["React", "Next.js", "TypeScript", "AWS", "PostgreSQL"]
+    technologies: ["Power BI", "DAX", "SQL", "Excel", "Python", "Azure"]
   },
   {
-    title: "Frontend Developer",
-    company: "Digital Agency Pro",
-    period: "2020 - 2022",
+    title: "Web Development Intern",
+    company: "Strathmore University",
+    period: "2023-Present",
     location: "Nairobi, Kenya",
-    description: "Developed responsive web applications and collaborated with design teams to create exceptional user experiences.",
+    description: "Participated in web development projects as part of the Business Information Technology program. Gained hands-on experience in modern web technologies and project management methodologies.",
     achievements: [
-      "Built 15+ responsive websites with 99% client satisfaction",
-      "Reduced page load times by 50% through performance optimization",
-      "Implemented modern design systems and component libraries"
+      "Developed responsive web applications using React and Next.js",
+      "Collaborated on team projects using Agile methodologies",
+      "Created database schemas and implemented CRUD operations",
+      "Presented project demos to faculty and industry professionals"
     ],
-    technologies: ["React", "JavaScript", "Tailwind CSS", "Figma", "Git"]
+    technologies: ["React", "Next.js", "JavaScript", "HTML/CSS", "Node.js", "MySQL"]
   },
   {
-    title: "Junior Web Developer",
-    company: "StartUp Hub",
-    period: "2019 - 2020",
+    title: "Administrative Assistant – Faculty Affairs",
+    company: "Strathmore University",
+    period: "2025 – Present",
     location: "Nairobi, Kenya",
-    description: "Started my professional journey building websites and learning modern web development practices.",
+    description: "Assist the Office of Faculty Affairs in coordinating academic and administrative activities. Support workshop planning, event logistics, and departmental operations to ensure smooth execution of faculty-related programs.",
     achievements: [
-      "Developed 10+ client websites from scratch",
-      "Learned and implemented responsive design principles",
-      "Collaborated with cross-functional teams"
+      "Supported planning and logistics for multiple faculty workshops and events",
+      "Assisted in organizing departmental indoor activities, ensuring timely execution",
+      "Coordinated pre-event arrangements including scheduling, communication, and resource allocation",
+      "Provided administrative support to the department, contributing to improved efficiency"
     ],
-    technologies: ["HTML", "CSS", "JavaScript", "WordPress", "PHP"]
+    technologies: ["Microsoft Office", "Google Workspace", "Event Coordination", "Administrative Support"]
   }
 ];
 
