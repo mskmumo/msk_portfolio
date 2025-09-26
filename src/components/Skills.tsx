@@ -73,7 +73,7 @@ export function Skills() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Skills & Expertise
           </h2>
-          <p className="text-neutral max-w-2xl mx-auto text-lg">
+          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto text-lg">
             A comprehensive overview of my technical skills and proficiency levels across different domains.
           </p>
         </motion.div>
@@ -89,7 +89,7 @@ export function Skills() {
             <motion.div
               key={category.title}
               variants={categoryVariants}
-              className="bg-white dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/50"
+              className="bg-card-bg backdrop-blur-sm border border-border rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/50"
             >
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 {category.title}
@@ -105,11 +105,11 @@ export function Skills() {
                       <span className="text-sm font-medium text-foreground">
                         {skill.name}
                       </span>
-                      <span className="text-xs text-neutral">
+                      <span className="text-xs text-neutral-600 dark:text-neutral-300">
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                       <motion.div
                         className="bg-gradient-to-r from-primary to-accent h-2 rounded-full"
                         initial={{ width: 0 }}

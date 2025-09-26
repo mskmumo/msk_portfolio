@@ -79,10 +79,10 @@ export function Education() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Education & Certifications
           </h2>
-          <p className="text-muted max-w-2xl mx-auto">
+          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
             My academic background and professional certifications that have shaped my expertise.
           </p>
         </motion.div>
@@ -103,20 +103,20 @@ export function Education() {
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -4 }}
-                  className="bg-off-white/90 dark:bg-deep-blue/80 rounded-xl p-6 border border-soft-blue/20 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  className="bg-card-bg rounded-xl p-6 border border-border backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
                     <div>
                       <h4 className="text-lg font-semibold text-primary mb-1">
                         {edu.degree}
                       </h4>
-                      <div className="flex items-center text-sm text-muted">
+                      <div className="flex items-center text-sm text-neutral-600 dark:text-neutral-300">
                         <span className="font-medium">{edu.institution}</span>
                         <span className="mx-2">•</span>
                         <span>{edu.location}</span>
                       </div>
                     </div>
-                    <span className="text-sm text-accent font-medium mt-2 sm:mt-0">
+                    <span className="text-sm text-primary font-medium mt-2 sm:mt-0">
                       {edu.period}
                     </span>
                   </div>
@@ -129,8 +129,8 @@ export function Education() {
                     <h5 className="text-sm font-semibold text-primary mb-2">Achievements:</h5>
                     <ul className="space-y-1">
                       {edu.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-muted flex items-start">
-                          <span className="text-accent mr-2 mt-1">•</span>
+                        <li key={achIndex} className="text-sm text-neutral-600 dark:text-neutral-300 flex items-start">
+                          <span className="text-primary mr-2 mt-1">•</span>
                           {achievement}
                         </li>
                       ))}
@@ -143,7 +143,7 @@ export function Education() {
                       {edu.coursework.map((course) => (
                         <span
                           key={course}
-                          className="text-xs px-2 py-1 bg-sky-blue/20 text-deep-blue dark:bg-sky-blue/30 dark:text-off-white rounded-full font-medium"
+                          className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full font-medium"
                         >
                           {course}
                         </span>
@@ -170,12 +170,12 @@ export function Education() {
                   key={index}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-gradient-to-br from-sky-blue/10 to-soft-blue/10 dark:from-deep-blue/20 dark:to-soft-blue/20 rounded-lg p-4 border border-soft-blue/20 backdrop-blur-sm"
+                  className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg p-4 border border-border backdrop-blur-sm"
                 >
                   <h4 className="font-semibold text-primary text-sm mb-2">
                     {cert.name}
                   </h4>
-                  <div className="text-xs text-muted space-y-1">
+                  <div className="text-xs text-neutral-600 dark:text-neutral-300 space-y-1">
                     <div className="flex justify-between">
                       <span>Issuer:</span>
                       <span className="font-medium">{cert.issuer}</span>
@@ -196,12 +196,12 @@ export function Education() {
             {/* Additional Info */}
             <motion.div
               variants={itemVariants}
-              className="mt-6 p-4 bg-gradient-to-br from-accent/10 to-secondary/10 rounded-lg border border-soft-blue/20"
+              className="mt-6 p-4 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg border border-border"
             >
               <h4 className="font-semibold text-primary text-sm mb-2">
                 Continuous Learning
               </h4>
-              <p className="text-xs text-muted leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
                 I believe in lifelong learning and regularly update my skills through online courses, 
                 workshops, and industry conferences to stay current with the latest technologies.
               </p>

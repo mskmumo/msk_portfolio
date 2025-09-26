@@ -62,8 +62,10 @@ const itemVariants = {
 
 export function Experience() {
   return (
-    <section id="experience" className="py-16 sm:py-24 bg-gradient-to-br from-background to-gray-900/20">
-      <div className="mx-auto max-w-4xl px-4">
+    <section id="experience" className="py-16 sm:py-24 bg-background relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+      <div className="mx-auto max-w-4xl px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -71,11 +73,11 @@ export function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Work Experience
           </h2>
-          <p className="text-muted max-w-2xl mx-auto">
-            My professional journey and the impact I've made at various organizations.
+          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+            My professional journey and the impact I&apos;ve made at various organizations.
           </p>
         </motion.div>
 
@@ -87,7 +89,7 @@ export function Experience() {
           className="relative"
         >
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-secondary to-accent"></div>
+          <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary to-secondary"></div>
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -98,24 +100,24 @@ export function Experience() {
               }`}
             >
               {/* Timeline dot */}
-              <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-3 h-3 bg-accent rounded-full border-2 border-background z-10"></div>
+              <div className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full border-2 border-background z-10"></div>
 
               {/* Content card */}
               <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="bg-off-white/90 dark:bg-deep-blue/80 rounded-xl p-6 border border-soft-blue/20 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  className="bg-card-bg rounded-xl p-6 border border-border backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                     <h3 className="text-lg font-semibold text-primary">
                       {exp.title}
                     </h3>
-                    <span className="text-sm text-accent font-medium">
+                    <span className="text-sm text-primary font-medium">
                       {exp.period}
                     </span>
                   </div>
                   
-                  <div className="flex items-center text-sm text-muted mb-3">
+                  <div className="flex items-center text-sm text-neutral-600 dark:text-neutral-300 mb-3">
                     <span className="font-medium">{exp.company}</span>
                     <span className="mx-2">•</span>
                     <span>{exp.location}</span>
@@ -129,8 +131,8 @@ export function Experience() {
                     <h4 className="text-sm font-semibold text-primary mb-2">Key Achievements:</h4>
                     <ul className="space-y-1">
                       {exp.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-muted flex items-start">
-                          <span className="text-accent mr-2 mt-1">•</span>
+                        <li key={achIndex} className="text-sm text-neutral-600 dark:text-neutral-300 flex items-start">
+                          <span className="text-primary mr-2 mt-1">•</span>
                           {achievement}
                         </li>
                       ))}
@@ -141,7 +143,7 @@ export function Experience() {
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs px-2 py-1 bg-sky-blue/20 text-deep-blue dark:bg-sky-blue/30 dark:text-off-white rounded-full font-medium"
+                        className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full font-medium"
                       >
                         {tech}
                       </span>

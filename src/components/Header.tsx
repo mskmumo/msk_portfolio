@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ContactModal } from "@/components/ContactModal";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Close menu when clicking outside or on escape
   useEffect(() => {
@@ -41,25 +44,48 @@ export function Header() {
     setIsMenuOpen(false);
   };
 
+  const handleContactClick = () => {
+    setIsContactModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
-    <header className="sticky top-0 z-40 w-full backdrop-blur-sm bg-white/80 dark:bg-background/80 border-b border-gray-200 dark:border-gray-700">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-sm bg-card-bg/80 dark:bg-background/80 border-b border-border">
       <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="font-bold tracking-tight text-xl text-foreground hover:text-primary transition-colors duration-300">
-          Mumo Mwangangi
+        <Link href="/" className="flex items-center space-x-3 group">
+          <div className="relative">
+            <Image
+              src="/logo.svg"
+              alt="Mumo Mwangangi Logo"
+              width={40}
+              height={40}
+              className="transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+          <span className="font-bold tracking-tight text-xl text-foreground group-hover:text-primary transition-colors duration-300">
+            Mumo Mwangangi
+          </span>
         </Link>
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {navLinks.map((link) => (
+          {navLinks.slice(0, -1).map((link) => (
             <Link 
               key={link.href}
               href={link.href} 
-              className="text-foreground hover:text-primary transition-colors duration-300"
+              className="text-foreground hover:text-primary transition-colors duration-300 relative group"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
           <ThemeToggle />
+              <button 
+                onClick={handleContactClick}
+                className="inline-flex items-center justify-center rounded-full px-6 py-2 bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Contact
+              </button>
         </nav>
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
@@ -119,11 +145,11 @@ export function Header() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-900 shadow-2xl z-50 md:hidden"
+            className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-card-bg dark:bg-card-bg shadow-2xl z-50 md:hidden"
           >
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between p-6 border-b border-border">
                 <span className="font-bold text-lg text-foreground">Menu</span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
@@ -146,20 +172,29 @@ export function Header() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Link
-                        href={link.href}
-                        onClick={handleLinkClick}
-                        className="block text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
-                      >
-                        {link.label}
-                      </Link>
+                      {link.href === "#contact" ? (
+                        <button
+                          onClick={handleContactClick}
+                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2 w-full text-left"
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          onClick={handleLinkClick}
+                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </motion.div>
                   ))}
                 </div>
               </nav>
               
               {/* Footer */}
-              <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="p-6 border-t border-border">
                 <p className="text-sm text-neutral text-center">
                   © 2024 Mumo Mwangangi
                 </p>
@@ -169,6 +204,11 @@ export function Header() {
         </>
       )}
     </AnimatePresence>
+
+    <ContactModal 
+      isOpen={isContactModalOpen} 
+      onClose={() => setIsContactModalOpen(false)} 
+    />
     </>
   );
 }

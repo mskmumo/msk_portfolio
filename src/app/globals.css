@@ -5,28 +5,42 @@ html {
 }
 
 :root {
-  /* New Orange Color Palette */
-  --primary: #F97316;        /* accent orange */
-  --accent: #FB923C;         /* light orange highlights */
-  --highlight: #FDE68A;      /* soft yellow for emphasis */
+  /* Light Mode Palette - Neo Mint + Teal (Fresh & Modern) */
+  --background: #F9FAFB;     /* soft white/gray for readability */
+  --foreground: #111827;     /* almost black for strong contrast */
+  --neutral: #6B7280;        /* muted gray for less emphasis */
+  --card-bg: #FFFFFF;        /* white with subtle shadow */
+  --border: #E5E7EB;         /* light gray for clean separation */
   
-  /* Light mode colors */
-  --background: #FFFFFF;     /* white background */
-  --foreground: #1F2937;     /* dark gray text */
-  --neutral: #6B7280;        /* muted gray text */
+  /* Accent Colors - Neo Mint + Teal */
+  --primary: #06B6D4;        /* teal cyan, energetic & modern */
+  --secondary: #10B981;      /* emerald green, adds freshness */
+  --accent: #06B6D4;         /* same as primary for consistency */
+  --highlight: #D1FAE5;      /* soft mint green for emphasis */
 }
 
-/* Dark mode colors */
+/* Dark Mode Palette - Sleek, Premium, Futuristic */
 .dark {
-  --background: #18181B;     /* very dark gray background */
-  --foreground: #FFFFFF;     /* white text */
-  --neutral: #9CA3AF;        /* lighter muted gray for dark mode */
+  --background: #0F172A;    /* deep navy-black for modern dark UI */
+  --foreground: #F9FAFB;     /* white for contrast */
+  --neutral: #9CA3AF;        /* soft gray for subtle text */
+  --card-bg: #1E293B;        /* dark slate for depth */
+  --border: #334155;         /* slightly lighter slate for separation */
+  
+  /* Accent Colors - Neo Mint + Teal Dark Mode */
+  --primary: #06B6D4;        /* same teal cyan, keeps branding consistent */
+  --secondary: #10B981;      /* same emerald green for consistency */
+  --accent: #06B6D4;         /* same as primary for consistency */
+  --highlight: #D1FAE5;      /* soft mint green for emphasis */
 }
 
 @theme inline {
   --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-background: var(--background);
+  --color-card-bg: var(--card-bg);
+  --color-border: var(--border);
   --color-highlight: var(--highlight);
   --color-neutral: var(--neutral);
   --color-foreground: var(--foreground);
@@ -40,4 +54,80 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Utility classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Smooth transitions for interactive elements */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
