@@ -70,7 +70,7 @@ export function ContactForm() {
         <motion.div variants={itemVariants} className="text-center mb-8">
           <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Get In Touch</h3>
           <p className="text-neutral-600 dark:text-neutral-300">
-            Ready to start your project? Fill out the form below and I'll get back to you within 24 hours.
+            Ready to start your project? Fill out the form below and I&apos;ll get back to you within 24 hours.
           </p>
         </motion.div>
 
@@ -231,7 +231,7 @@ export function ContactForm() {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className="font-medium">Message sent! I'll get back to you soon.</span>
+                    <span className="font-medium">Message sent! I&apos;ll get back to you soon.</span>
                   </motion.div>
                 )}
                 
