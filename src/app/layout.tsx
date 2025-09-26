@@ -31,7 +31,7 @@ export default function RootLayout({
           {/* <script defer data-domain="example.com" src="https://plausible.io/js/script.js"></script> */}
           <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white dark:focus:bg-neutral-900 focus:text-black dark:focus:text-white focus:p-2 focus:rounded">Skip to content</a>
           <Header />
-          <main id="content" className="mx-auto max-w-6xl px-4 py-10">
+          <main id="content" className="min-h-screen">
             {children}
           </main>
           <Footer />

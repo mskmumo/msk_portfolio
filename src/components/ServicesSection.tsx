@@ -13,6 +13,7 @@ import {
 
 export function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
 
   const services = [
     {
@@ -94,13 +95,13 @@ export function ServicesSection() {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-background relative overflow-hidden">
       {/* Enhanced Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-primary/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-secondary/10 rounded-full blur-3xl"></div>
       
-      <div className="mx-auto max-w-7xl px-4 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,10 +109,10 @@ export function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 sm:mb-6">
             Professional Services
           </h2>
-          <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
             Comprehensive solutions combining software engineering excellence with data-driven insights 
             to transform your business challenges into strategic advantages.
           </p>
@@ -122,7 +123,7 @@ export function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {services.map((service, index) => {
             const IconComponent = service.icon;
@@ -132,23 +133,24 @@ export function ServicesSection() {
                 variants={cardVariants}
                 onHoverStart={() => setHoveredIndex(index)}
                 onHoverEnd={() => setHoveredIndex(null)}
-                className="group relative"
+                onClick={() => setClickedIndex(clickedIndex === index ? null : index)}
+                className="group relative cursor-pointer"
               >
                 <div className={`
-                  relative rounded-2xl border border-border p-8 bg-card-bg backdrop-blur-sm 
+                  relative rounded-xl sm:rounded-2xl border border-border p-4 sm:p-6 lg:p-8 bg-card-bg backdrop-blur-sm 
                   shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden
-                  ${hoveredIndex === index ? 'scale-105 border-primary/50' : ''}
+                  ${hoveredIndex === index || clickedIndex === index ? 'scale-105 border-primary/50' : ''}
                 `}>
                   {/* Animated background gradient */}
                   <div className={`
-                    absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 
-                    group-hover:opacity-100 transition-opacity duration-500
+                    absolute inset-0 bg-gradient-to-br ${service.gradient} transition-opacity duration-500
+                    ${hoveredIndex === index || clickedIndex === index ? 'opacity-100' : 'opacity-0'}
                   `}></div>
                   
                   {/* Animated border gradient */}
                   <div className={`
-                    absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
-                    transition-opacity duration-500 bg-gradient-to-r ${service.borderGradient} p-[1px]
+                    absolute inset-0 rounded-2xl transition-opacity duration-500 bg-gradient-to-r ${service.borderGradient} p-[1px]
+                    ${hoveredIndex === index || clickedIndex === index ? 'opacity-100' : 'opacity-0'}
                   `}>
                     <div className="w-full h-full rounded-2xl bg-card-bg"></div>
                   </div>
@@ -156,30 +158,30 @@ export function ServicesSection() {
                   <div className="relative z-10">
                     {/* Icon with animation */}
                     <motion.div
-                      animate={hoveredIndex === index ? { rotate: 360, scale: 1.1 } : { rotate: 0, scale: 1 }}
+                      animate={hoveredIndex === index || clickedIndex === index ? { rotate: 360, scale: 1.1 } : { rotate: 0, scale: 1 }}
                       transition={{ duration: 0.5 }}
                       className={`
-                        w-16 h-16 rounded-xl bg-gradient-to-br ${service.borderGradient} 
-                        flex items-center justify-center mb-6 shadow-lg
+                        w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 rounded-lg sm:rounded-xl bg-gradient-to-br ${service.borderGradient} 
+                        flex items-center justify-center mb-4 sm:mb-6 shadow-lg
                       `}
                     >
-                      <IconComponent className="w-8 h-8 text-white" />
+                      <IconComponent className="w-6 sm:w-7 lg:w-8 h-6 sm:h-7 lg:h-8 text-white" />
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="font-bold text-xl text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="font-bold text-lg sm:text-xl text-foreground mb-3 sm:mb-4 group-hover:text-primary transition-colors duration-300">
                       {service.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-neutral-600 dark:text-neutral-300 mb-6 leading-relaxed">
+                    <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mb-4 sm:mb-6 leading-relaxed">
                       {service.description}
                     </p>
 
                     {/* Features list with sliding animation */}
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
-                      animate={hoveredIndex === index ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                      animate={hoveredIndex === index || clickedIndex === index ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
@@ -190,7 +192,7 @@ export function ServicesSection() {
                             <motion.li
                               key={feature}
                               initial={{ x: -20, opacity: 0 }}
-                              animate={hoveredIndex === index ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
+                              animate={hoveredIndex === index || clickedIndex === index ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
                               transition={{ delay: featureIndex * 0.1, duration: 0.3 }}
                               className="flex items-center space-x-2 text-sm text-neutral-600 dark:text-neutral-300"
                             >

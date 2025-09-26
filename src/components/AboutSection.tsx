@@ -4,21 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
-
 export function AboutSection() {
   return (
-    <section id="about" className="py-16 sm:py-24 bg-background relative">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/5 via-transparent to-primary/5"></div>
-      
-      <div className="mx-auto max-w-6xl px-4 relative">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-background">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Left side - Image and social */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            viewport={{ once: true }}
             className="space-y-6"
           >
             <div className="relative w-full max-w-sm mx-auto">
@@ -79,16 +74,16 @@ export function AboutSection() {
             className="space-y-6"
           >
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
                 I am Professional{" "}
                 <span className="text-primary">Business Intelligence</span> Engineer
               </h2>
-              <p className="text-neutral-600 dark:text-neutral-300 text-lg leading-relaxed mb-4">
+              <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed mb-4">
                 I design and develop services for customers specializing in creating stylish, modern 
                 websites, web services and online stores. My passion is to design digital user experiences 
                 that transform data into actionable insights.
               </p>
-              <p className="text-neutral-600 dark:text-neutral-300 text-lg leading-relaxed">
+              <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed">
                 I design and develop services for customers specializing in creating stylish, modern 
                 websites, web services and interactive dashboards that drive business growth.
               </p>
