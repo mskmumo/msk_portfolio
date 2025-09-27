@@ -78,12 +78,12 @@ export function AboutSection() {
                 I am Professional{" "}
                 <span className="text-primary">Business Intelligence</span> Engineer
               </h2>
-              <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed mb-4">
+              <p className="text-neutral dark:text-neutral text-base sm:text-lg leading-relaxed mb-4">
                 I design and develop services for customers specializing in creating stylish, modern 
                 websites, web services and online stores. My passion is to design digital user experiences 
                 that transform data into actionable insights.
               </p>
-              <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-neutral dark:text-neutral text-base sm:text-lg leading-relaxed">
                 I design and develop services for customers specializing in creating stylish, modern 
                 websites, web services and interactive dashboards that drive business growth.
               </p>

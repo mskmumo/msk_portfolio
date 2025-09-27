@@ -112,7 +112,7 @@ export function ServicesSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 sm:mb-6">
             Professional Services
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-neutral dark:text-neutral max-w-3xl mx-auto leading-relaxed">
             Comprehensive solutions combining software engineering excellence with data-driven insights 
             to transform your business challenges into strategic advantages.
           </p>
@@ -174,7 +174,7 @@ export function ServicesSection() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mb-4 sm:mb-6 leading-relaxed">
+                    <p className="text-sm sm:text-base text-neutral dark:text-neutral mb-4 sm:mb-6 leading-relaxed">
                       {service.description}
                     </p>
 
@@ -194,7 +194,7 @@ export function ServicesSection() {
                               initial={{ x: -20, opacity: 0 }}
                               animate={hoveredIndex === index || clickedIndex === index ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
                               transition={{ delay: featureIndex * 0.1, duration: 0.3 }}
-                              className="flex items-center space-x-2 text-sm text-neutral-600 dark:text-neutral-300"
+                              className="flex items-center space-x-2 text-sm text-neutral dark:text-neutral"
                             >
                               <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.borderGradient}`}></span>
                               <span>{feature}</span>
@@ -218,7 +218,7 @@ export function ServicesSection() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="text-center mt-16"
         >
-          <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-8">
+          <p className="text-lg text-neutral dark:text-neutral mb-8">
             Ready to transform your business with data-driven solutions?
           </p>
           <motion.a

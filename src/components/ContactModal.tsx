@@ -90,7 +90,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                 aria-label="Close modal"
               >
-                <XMarkIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
+                <XMarkIcon className="w-5 h-5 text-neutral dark:text-neutral" />
               </button>
             </div>
 
@@ -99,7 +99,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div className="p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-primary/5 to-secondary/5 order-2 lg:order-1">
                 <div className="mb-8">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4">Let&apos;s discuss your Project</h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral dark:text-neutral">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
                   </p>
                 </div>
@@ -111,7 +111,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <MapPinIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">Address</p>
+                      <p className="text-xs sm:text-sm text-neutral dark:text-neutral">Address</p>
                       <p className="text-sm sm:text-base font-medium text-foreground">Nairobi, Kenya</p>
                     </div>
                   </div>
@@ -121,7 +121,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         <EnvelopeIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                       </div>
                       <div>
-                        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">My Email</p>
+                        <p className="text-xs sm:text-sm text-neutral dark:text-neutral">My Email</p>
                         <p className="text-sm sm:text-base font-medium text-foreground break-all">mskmumo@gmail.com</p>
                       </div>
                     </div>
@@ -131,7 +131,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       <PhoneIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                     </div>
                     <div>
-                      <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">Call Me Now</p>
+                      <p className="text-xs sm:text-sm text-neutral dark:text-neutral">Call Me Now</p>
                       <p className="text-sm sm:text-base font-medium text-foreground">+254 110 018 735</p>
                     </div>
                   </div>
@@ -170,7 +170,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               {/* Right Column - Contact Form */}
               <div className="p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
                 <div className="mb-4 sm:mb-6">
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral dark:text-neutral">
                     There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
                   </p>
                 </div>

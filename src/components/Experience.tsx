@@ -79,7 +79,7 @@ export function Experience() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Work Experience
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-neutral dark:text-neutral max-w-2xl mx-auto">
             My professional journey and the impact I&apos;ve made at various organizations.
           </p>
         </motion.div>
@@ -120,7 +120,7 @@ export function Experience() {
                     </span>
                   </div>
                   
-                  <div className="flex items-center text-sm text-neutral-600 dark:text-neutral-300 mb-3">
+                  <div className="flex items-center text-sm text-neutral dark:text-neutral mb-3">
                     <span className="font-medium">{exp.company}</span>
                     <span className="mx-2">•</span>
                     <span>{exp.location}</span>
@@ -134,7 +134,7 @@ export function Experience() {
                     <h4 className="text-sm font-semibold text-primary mb-2">Key Achievements:</h4>
                     <ul className="space-y-1">
                       {exp.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-neutral-600 dark:text-neutral-300 flex items-start">
+                        <li key={achIndex} className="text-sm text-neutral dark:text-neutral flex items-start">
                           <span className="text-primary mr-2 mt-1">•</span>
                           {achievement}
                         </li>

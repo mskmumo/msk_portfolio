@@ -18,6 +18,7 @@ const config: Config = {
         border: 'var(--color-border)',
         highlight: 'var(--color-highlight)',
         neutral: 'var(--color-neutral)',
+        muted: 'var(--color-muted)',
         foreground: 'var(--color-foreground)',
       },
       fontFamily: {

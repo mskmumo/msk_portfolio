@@ -25,14 +25,14 @@ export function Hero() {
                 Hello, I&apos;m{" "}
                 <span className="text-primary">Mumo Mwangangi</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-neutral dark:text-neutral max-w-2xl leading-relaxed">
                 I&apos;m a Software Developer and Data Analyst based in Kenya. I bridge the gap between code and insights, 
                 building intelligent applications while transforming complex data into strategic business solutions that drive measurable impact.
               </p>
               
               <div className="bg-card-bg border border-border rounded-xl p-6 space-y-4">
                 <h3 className="text-lg font-semibold text-foreground">What Sets Me Apart:</h3>
-                <ul className="space-y-3 text-neutral-600 dark:text-neutral-300">
+                <ul className="space-y-3 text-neutral dark:text-neutral">
                   <li className="flex items-start space-x-3">
                     <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
                     <span>Unique blend of software engineering rigor and analytical thinking</span>
@@ -84,15 +84,15 @@ export function Hero() {
             >
               <div className="text-center">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">5+</div>
-                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">Years Experience</div>
+                <div className="text-xs sm:text-sm text-muted dark:text-muted">Years Experience</div>
               </div>
               <div className="text-center">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">50+</div>
-                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">Projects Completed</div>
+                <div className="text-xs sm:text-sm text-muted dark:text-muted">Projects Completed</div>
               </div>
               <div className="text-center">
                 <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">25+</div>
-                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">Happy Clients</div>
+                <div className="text-xs sm:text-sm text-muted dark:text-muted">Happy Clients</div>
               </div>
             </motion.div>
           </div>

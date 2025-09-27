@@ -127,7 +127,7 @@ export function Education() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Education & Certifications
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-neutral dark:text-neutral max-w-2xl mx-auto">
             My academic background and professional certifications that have shaped my expertise.
           </p>
         </motion.div>
@@ -155,7 +155,7 @@ export function Education() {
                       <h4 className="text-lg font-semibold text-primary mb-1">
                         {edu.degree}
                       </h4>
-                      <div className="flex items-center text-sm text-neutral-600 dark:text-neutral-300">
+                      <div className="flex items-center text-sm text-neutral dark:text-neutral">
                         <span className="font-medium">{edu.institution}</span>
                         <span className="mx-2">•</span>
                         <span>{edu.location}</span>
@@ -171,7 +171,7 @@ export function Education() {
                     <h5 className="text-sm font-semibold text-primary mb-2">Achievements:</h5>
                     <ul className="space-y-1">
                       {edu.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-sm text-neutral-600 dark:text-neutral-300 flex items-start">
+                        <li key={achIndex} className="text-sm text-neutral dark:text-neutral flex items-start">
                           <span className="text-primary mr-2 mt-1">•</span>
                           {achievement}
                         </li>
@@ -217,7 +217,7 @@ export function Education() {
                   <h4 className="font-semibold text-primary text-sm mb-2">
                     {cert.name}
                   </h4>
-                  <div className="text-xs text-neutral-600 dark:text-neutral-300 space-y-1">
+                  <div className="text-xs text-neutral dark:text-neutral space-y-1">
                     <div className="flex justify-between">
                       <span>Issuer:</span>
                       <span className="font-medium">{cert.issuer}</span>
@@ -243,7 +243,7 @@ export function Education() {
               <h4 className="font-semibold text-primary text-sm mb-2">
                 Continuous Learning
               </h4>
-              <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
+              <p className="text-xs text-neutral dark:text-neutral leading-relaxed">
                 I believe in lifelong learning and regularly update my skills through online courses, 
                 workshops, and industry conferences to stay current with the latest technologies.
               </p>

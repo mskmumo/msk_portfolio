@@ -91,7 +91,7 @@ export function FeaturedProjects() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Featured Projects
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-neutral dark:text-neutral max-w-2xl mx-auto">
             Explore my latest work in Business Intelligence and web development
           </p>
         </motion.div>
@@ -188,7 +188,7 @@ export function FeaturedProjects() {
                           {currentProject.subtitle}
                         </p>
                       )}
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-neutral dark:text-neutral leading-relaxed line-clamp-3">
                         {currentProject.summary}
                       </p>
                     </div>
@@ -206,7 +206,7 @@ export function FeaturedProjects() {
                         ))}
                       </div>
 
-                      <div className="text-xs text-neutral-600 dark:text-neutral-300">
+                      <div className="text-xs text-neutral dark:text-neutral">
                         <span><strong>Role:</strong> {currentProject.role}</span>
                       </div>
                     </div>
@@ -248,7 +248,7 @@ export function FeaturedProjects() {
           {/* Enhanced Timer Progress Bar */}
           {isAutoPlaying && (
             <div className="mt-6 space-y-2">
-              <div className="flex items-center justify-center space-x-2 text-sm text-neutral-600 dark:text-neutral-300">
+              <div className="flex items-center justify-center space-x-2 text-sm text-muted dark:text-muted">
                 <span>Next project in:</span>
                 <div className="flex items-center space-x-1">
                   <div className="relative w-5 h-5">
@@ -297,7 +297,7 @@ export function FeaturedProjects() {
           <div className="flex justify-center mt-4">
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="text-sm text-neutral-600 dark:text-neutral-300 hover:text-primary transition-colors duration-200"
+              className="text-sm text-muted dark:text-muted hover:text-primary transition-colors duration-200"
             >
               {isAutoPlaying ? 'Pause' : 'Play'} slideshow
             </button>
@@ -358,7 +358,7 @@ export function FeaturedProjects() {
                           {selectedProject.subtitle}
                         </p>
                       )}
-                      <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                      <p className="text-neutral dark:text-neutral leading-relaxed">
                         {selectedProject.summary}
                       </p>
                     </div>
@@ -376,7 +376,7 @@ export function FeaturedProjects() {
                         ))}
                       </div>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-300">
+                      <div className="flex flex-wrap gap-4 text-sm text-neutral dark:text-neutral">
                         <span><strong>Role:</strong> {selectedProject.role}</span>
                         {selectedProject.client && (
                           <span><strong>Client:</strong> {selectedProject.client}</span>
@@ -406,7 +406,7 @@ export function FeaturedProjects() {
                             {selectedProject.metrics.map((metric: { value: string; label: string }, index: number) => (
                               <div key={index} className="text-center p-3 bg-background rounded-lg border border-border">
                                 <div className="text-lg font-bold text-primary">{metric.value}</div>
-                                <div className="text-xs text-neutral-600 dark:text-neutral-300">{metric.label}</div>
+                                <div className="text-xs text-muted dark:text-muted">{metric.label}</div>
                               </div>
                             ))}
                           </div>
@@ -417,28 +417,28 @@ export function FeaturedProjects() {
                       {selectedProject.problem && (
                         <div>
                           <h4 className="text-sm font-semibold text-foreground mb-2">Problem</h4>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-300">{selectedProject.problem}</p>
+                          <p className="text-sm text-neutral dark:text-neutral">{selectedProject.problem}</p>
                         </div>
                       )}
 
                       {selectedProject.approach && (
                         <div>
                           <h4 className="text-sm font-semibold text-foreground mb-2">Approach</h4>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-300">{selectedProject.approach}</p>
+                          <p className="text-sm text-neutral dark:text-neutral">{selectedProject.approach}</p>
                         </div>
                       )}
 
                       {selectedProject.solution && (
                         <div>
                           <h4 className="text-sm font-semibold text-foreground mb-2">Solution</h4>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-300">{selectedProject.solution}</p>
+                          <p className="text-sm text-neutral dark:text-neutral">{selectedProject.solution}</p>
                         </div>
                       )}
 
                       {selectedProject.impact && (
                         <div>
                           <h4 className="text-sm font-semibold text-foreground mb-2">Impact</h4>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-300">{selectedProject.impact}</p>
+                          <p className="text-sm text-neutral dark:text-neutral">{selectedProject.impact}</p>
                         </div>
                       )}
                     </div>

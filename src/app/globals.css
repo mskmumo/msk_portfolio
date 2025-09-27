@@ -8,7 +8,8 @@ html {
   /* Light Mode Palette - Neo Mint + Teal (Fresh & Modern) */
   --background: #F9FAFB;     /* soft white/gray for readability */
   --foreground: #111827;     /* almost black for strong contrast */
-  --neutral: #374151;        /* darker gray for better readability in light mode */
+  --neutral: #1F2937;        /* much darker gray for better contrast in light mode */
+  --muted: #4B5563;          /* medium gray for secondary text */
   --card-bg: #FFFFFF;        /* white with subtle shadow */
   --border: #E5E7EB;         /* light gray for clean separation */
   
@@ -23,7 +24,8 @@ html {
 .dark {
   --background: #0F172A;    /* deep navy-black for modern dark UI */
   --foreground: #F9FAFB;     /* white for contrast */
-  --neutral: #9CA3AF;        /* soft gray for subtle text */
+  --neutral: #D1D5DB;        /* lighter gray for better contrast in dark mode */
+  --muted: #9CA3AF;          /* medium gray for secondary text */
   --card-bg: #1E293B;        /* dark slate for depth */
   --border: #334155;         /* slightly lighter slate for separation */
   
@@ -43,6 +45,7 @@ html {
   --color-border: var(--border);
   --color-highlight: var(--highlight);
   --color-neutral: var(--neutral);
+  --color-muted: var(--muted);
   --color-foreground: var(--foreground);
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', Consolas, 'Courier New', monospace;
