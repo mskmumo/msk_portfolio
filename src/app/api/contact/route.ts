@@ -131,26 +131,31 @@ export async function POST(req: NextRequest) {
     }
 
     try {
+      console.log("Creating SMTP transporter...");
       // Create transporter
       const transporter = createTransporter();
 
+      console.log("Verifying SMTP connection...");
       // Verify connection configuration
       await transporter.verify();
+      console.log("SMTP connection verified successfully");
 
       // Create email content
       const emailTemplate = createEmailTemplate(parsed.data);
 
+      console.log("Sending notification email...");
       // Send email to you
       await transporter.sendMail({
         from: `"Portfolio Contact Form" <${process.env.SMTP_FROM}>`,
         to: process.env.SMTP_TO,
         replyTo: parsed.data.email,
         subject: emailTemplate.subject,
-        text: emailTemplate.text,
         html: emailTemplate.html,
       });
+      console.log("Notification email sent successfully");
 
-      // Send confirmation email to the sender
+      console.log("Sending confirmation email to client...");
+      // Send confirmation email to client
       await transporter.sendMail({
         from: `"Mumo Mwangangi" <${process.env.SMTP_FROM}>`,
         to: parsed.data.email,
@@ -166,7 +171,6 @@ export async function POST(req: NextRequest) {
                 .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
                 .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
                 .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }
-                .cta { background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0; }
               </style>
             </head>
             <body>

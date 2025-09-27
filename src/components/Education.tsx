@@ -6,7 +6,6 @@ const education = [
   {
     degree: "Bachelor of Business Information Technology",
     institution: "Strathmore University",
-    period: "2024 – Present",
     location: "Nairobi, Kenya",
     description: "Focused on business technology, data analytics, project management, networking, database systems, and information systems with emphasis on business intelligence solutions.",
     achievements: [
@@ -33,11 +32,9 @@ const education = [
   {
     degree: "Diploma in Business Information Technology",
     institution: "Strathmore University",
-    period: "2023 – 2024",
     location: "Nairobi, Kenya",
-    description: "Comprehensive diploma program focused on programming, web development, data analysis, information systems, and business applications. Graduated with Distinction.",
+    description: "Comprehensive diploma program focused on programming, web development, data analysis, information systems, and business applications.",
     achievements: [
-      "Graduated with Distinction",
       "Built foundational projects in web development and business applications",
       "Completed data analysis projects using Excel and basic statistical methods",
       "Developed strong practical skills in programming and database design",
@@ -57,7 +54,6 @@ const education = [
   {
     degree: "Data Analytics Fundamentals Course",
     institution: "Online Certification Platform",
-    period: "2024",
     location: "Remote",
     description: "Specialized course focused on data analytics fundamentals, statistical analysis, and data visualization techniques using modern tools and methodologies.",
     achievements: [
@@ -165,9 +161,6 @@ export function Education() {
                         <span>{edu.location}</span>
                       </div>
                     </div>
-                    <span className="text-sm text-primary font-medium mt-2 sm:mt-0">
-                      {edu.period}
-                    </span>
                   </div>
 
                   <p className="text-foreground mb-4 text-sm leading-relaxed">
