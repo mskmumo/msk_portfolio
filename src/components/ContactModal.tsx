@@ -100,7 +100,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div className="mb-8">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4">Let&apos;s discuss your Project</h3>
                   <p className="text-neutral dark:text-neutral">
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                    Ready to transform your business with data-driven solutions? I'm here to help you build powerful applications and unlock insights from your data.
                   </p>
                 </div>
 
@@ -171,7 +171,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div className="p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
                 <div className="mb-4 sm:mb-6">
                   <p className="text-neutral dark:text-neutral">
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
+                    Share your project details below and I'll get back to you within 24 hours. Let's discuss how we can bring your vision to life.
                   </p>
                 </div>
 
