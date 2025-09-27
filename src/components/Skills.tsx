@@ -73,7 +73,7 @@ export function Skills() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             Skills & Expertise
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto text-lg">
+          <p className="text-neutral dark:text-neutral max-w-2xl mx-auto text-lg">
             A comprehensive overview of my technical skills and proficiency levels across different domains.
           </p>
         </motion.div>
@@ -105,7 +105,7 @@ export function Skills() {
                       <span className="text-sm font-medium text-foreground">
                         {skill.name}
                       </span>
-                      <span className="text-xs text-neutral-600 dark:text-neutral-300">
+                      <span className="text-xs text-neutral dark:text-neutral">
                         {skill.level}%
                       </span>
                     </div>

@@ -18,7 +18,7 @@ export function ContactCTA() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
               Let&apos;s build something great
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+            <p className="mt-4 text-base sm:text-lg text-neutral dark:text-neutral max-w-2xl mx-auto">
               Need a KPI dashboard or an animated, accessible web app? I can help from concept to deployment.
             </p>
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">

@@ -104,7 +104,7 @@ export function Testimonials() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
             What Clients Say
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+          <p className="text-neutral dark:text-neutral max-w-2xl mx-auto">
             Testimonials from clients and colleagues who have experienced my work firsthand.
           </p>
         </motion.div>
@@ -172,7 +172,7 @@ export function Testimonials() {
                 <div className="font-semibold text-primary">
                   {currentTestimonial.name}
                 </div>
-                <div className="text-sm text-neutral-600 dark:text-neutral-300">
+                <div className="text-sm text-neutral dark:text-neutral">
                   {currentTestimonial.role} at {currentTestimonial.company}
                 </div>
               </div>
@@ -199,7 +199,7 @@ export function Testimonials() {
         {/* Progress Bar Timer */}
         {isAutoPlaying && (
           <div className="mt-6 space-y-2">
-            <div className="flex items-center justify-center space-x-2 text-sm text-neutral-600 dark:text-neutral-300">
+            <div className="flex items-center justify-center space-x-2 text-sm text-neutral dark:text-neutral">
               <span>Next testimonial in:</span>
               <div className="flex items-center space-x-1">
                 <div className="relative w-5 h-5">
@@ -248,7 +248,7 @@ export function Testimonials() {
         <div className="flex justify-center mt-4">
           <button
             onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className="text-sm text-neutral-600 dark:text-neutral-300 hover:text-primary transition-colors duration-200"
+            className="text-sm text-neutral dark:text-neutral hover:text-primary transition-colors duration-200"
           >
             {isAutoPlaying ? 'Pause' : 'Play'} testimonials
           </button>
@@ -262,7 +262,7 @@ export function Testimonials() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <p className="text-neutral-600 dark:text-neutral-300 mb-4">
+          <p className="text-neutral dark:text-neutral mb-4">
             Ready to work together and create something amazing?
           </p>
           <motion.a

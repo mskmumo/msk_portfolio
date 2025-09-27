@@ -69,7 +69,7 @@ export function ContactForm() {
       <div className="bg-card-bg backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 shadow-xl">
         <motion.div variants={itemVariants} className="text-center mb-8">
           <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Get In Touch</h3>
-          <p className="text-neutral-600 dark:text-neutral-300">
+          <p className="text-neutral dark:text-neutral">
             Ready to start your project? Fill out the form below and I&apos;ll get back to you within 24 hours.
           </p>
         </motion.div>
