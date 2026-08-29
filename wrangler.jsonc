@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  /*
+   * `name` and the WORKER_SELF_REFERENCE service below MUST be identical.
+   *
+   * The deploy was failing with error 10143 because the self-reference
+   * pointed at "mumorealg" (the package.json name) while the Worker being
+   * deployed to is "msk-portfolio". OpenNext binds the Worker to itself, so
+   * the service name has to match the Worker's own name exactly.
+   *
+   * If you rename the Worker in the Cloudflare dashboard, change BOTH values
+   * here — and remember the workers.dev subdomain changes with it, so
+   * NEXT_PUBLIC_SITE_URL needs updating too.
+   */
+  "name": "msk-portfolio",
+
+  "main": ".open-next/worker.js",
+
+  // Must be 2024-09-23 or later for Next.js on Workers.
+  "compatibility_date": "2024-12-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+  // Paths are produced by `opennextjs-cloudflare build` — do not change them.
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "msk-portfolio"
+    }
+  ],
+
+  // Backs next/image optimisation, which this site uses for every portrait
+  // and case-study cover.
+  "images": {
+    "binding": "IMAGES"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

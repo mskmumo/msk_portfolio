@@ -62,11 +62,52 @@ Verify a domain in Resend and set `CONTACT_FROM` to switch confirmations on.
 
 ## Next.js on Workers
 
-A Next.js app does not run on Workers unmodified — it needs an adapter
-(`@opennextjs/cloudflare`, or `vinext`, which Cloudflare now recommends). That
-is **not yet set up in this repo**: there is no `wrangler.jsonc` and no adapter
-dependency. The contact form is now Workers-compatible, but the deployment
-pipeline still has to be added.
+A Next.js app does not run on Workers unmodified — it goes through the
+[`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare) adapter, which
+is now configured in this repo.
+
+```bash
+npm run cf:build      # next build + OpenNext bundle into .open-next/
+npm run cf:preview    # run the built Worker locally in workerd
+npm run cf:deploy     # build and deploy
+npm run cf:typegen    # regenerate cloudflare-env.d.ts from the bindings
+```
+
+### The Worker name must match itself
+
+`wrangler.jsonc` sets `name` and a `WORKER_SELF_REFERENCE` service binding.
+**These two values must be identical.** OpenNext binds the Worker to itself,
+and if the service name does not match the Worker being deployed, the deploy
+fails with:
+
+```
+Service binding 'WORKER_SELF_REFERENCE' references Worker 'X'
+which was not found. [code: 10143]
+```
+
+That is what happened when the binding pointed at `mumorealg` (the
+`package.json` name) while the Worker in the account is `msk-portfolio`. Both
+are now `msk-portfolio`.
+
+If you rename the Worker, change **both** values — and the `workers.dev`
+subdomain changes with it, so update `NEXT_PUBLIC_SITE_URL` too.
+
+### Version constraint
+
+`@opennextjs/cloudflare` requires `next >= 15.5.24`. The project was on
+15.5.4, which npm rejected as a peer conflict; it is now pinned to `^15.5.24`.
+Do not downgrade Next below that while the adapter is in use.
+
+### Verifying before you push
+
+```bash
+npm run cf:build
+npx wrangler deploy --dry-run
+```
+
+The dry run prints the resolved bindings. Confirm it shows
+`env.WORKER_SELF_REFERENCE (msk-portfolio)` — matching the Worker name — before
+deploying for real.
 
 ## If email breaks
 
