@@ -67,11 +67,34 @@ A Next.js app does not run on Workers unmodified — it goes through the
 is now configured in this repo.
 
 ```bash
-npm run cf:build      # next build + OpenNext bundle into .open-next/
+npm run build         # next build + OpenNext bundle into .open-next/
+npm run build:next    # plain `next build`, no Worker bundle
 npm run cf:preview    # run the built Worker locally in workerd
 npm run cf:deploy     # build and deploy
 npm run cf:typegen    # regenerate cloudflare-env.d.ts from the bindings
 ```
+
+### Why `build` is not `next build`
+
+Cloudflare Workers Builds runs `npm run build`, and its deploy step then looks
+for `.open-next/.build/open-next.config.edge.mjs`. Plain `next build` never
+writes that file, so the deploy fails with:
+
+```
+ERROR Could not find compiled Open Next config, did you run the build command?
+```
+
+So `build` runs `opennextjs-cloudflare build`. But OpenNext builds Next by
+shelling out to `npm run build` itself — which would make that script call
+itself forever. `open-next.config.ts` therefore sets:
+
+```ts
+config.buildCommand = "npm run build:next";
+```
+
+redirecting the inner call at the plain Next build and breaking the loop.
+**If you ever repoint `build`, keep that pair consistent or you get either an
+infinite build loop or a missing-config deploy failure.**
 
 ### The Worker name must match itself
 
@@ -101,7 +124,7 @@ Do not downgrade Next below that while the adapter is in use.
 ### Verifying before you push
 
 ```bash
-npm run cf:build
+npm run build
 npx wrangler deploy --dry-run
 ```
 
