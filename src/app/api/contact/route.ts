@@ -1,277 +1,176 @@
 import { NextRequest, NextResponse } from "next/server";
-import { contactSchema } from "@/lib/validation";
 import nodemailer from "nodemailer";
+import { contactSchema, type ContactInput } from "@/lib/validation";
+import { site } from "@/lib/site";
 
-// Create reusable transporter object using SMTP transport
-const createTransporter = () => {
-  return nodemailer.createTransport({
+/**
+ * Submitted values are user input. They were previously interpolated straight
+ * into the notification email's HTML, which let a submitter put markup and
+ * links into the inbox this form reports to.
+ */
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+const createTransporter = () =>
+  nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || "587"),
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
+    port: Number.parseInt(process.env.SMTP_PORT || "587", 10),
+    secure: process.env.SMTP_PORT === "465",
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
   });
-};
 
-// Email template function
-const createEmailTemplate = (data: {
-  name: string;
-  email: string;
-  phone: string;
-  budget: string;
-  subject: string;
-  message: string;
-}) => {
+const FALLBACK = `Please email ${site.email} or call ${site.phone} directly.`;
+
+function row(label: string, value?: string) {
+  if (!value) return "";
+  return `
+    <tr>
+      <td style="padding:10px 0;border-bottom:1px solid #e4e1d8;vertical-align:top;width:150px;color:#7c827c;font-size:13px;">${escapeHtml(label)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #e4e1d8;color:#101211;font-size:14px;">${escapeHtml(value).replace(/\n/g, "<br>")}</td>
+    </tr>`;
+}
+
+function notificationEmail(data: ContactInput) {
   return {
-    subject: `New Contact Form Submission from ${data.name}`,
+    subject: `Enquiry — ${data.name}${data.organisation ? ` (${data.organisation})` : ""}${data.projectType ? ` · ${data.projectType}` : ""}`,
     html: `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
-            .field { margin-bottom: 20px; }
-            .label { font-weight: bold; color: #555; display: block; margin-bottom: 5px; }
-            .value { background: white; padding: 10px; border-radius: 4px; border-left: 4px solid #667eea; }
-            .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h2>🚀 New Contact Form Submission</h2>
-              <p>You have received a new message through your portfolio website.</p>
-            </div>
-            <div class="content">
-              <div class="field">
-                <span class="label">👤 Name:</span>
-                <div class="value">${data.name}</div>
-              </div>
-              <div class="field">
-                <span class="label">📧 Email:</span>
-                <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
-              </div>
-              
-              <div class="field">
-                <span class="label">📱 Phone:</span>
-                <div class="value">${data.phone}</div>
-              </div>
-              
-              <div class="field">
-                <span class="label">💰 Budget (KSh):</span>
-                <div class="value">${data.budget}</div>
-              </div>
-              
-              <div class="field">
-                <span class="label">📋 Subject:</span>
-                <div class="value">${data.subject}</div>
-              </div>
-              
-              <div class="field">
-                <span class="label">💬 Message:</span>
-                <div class="value">${data.message.replace(/\n/g, '<br>')}</div>
-              </div>
-            </div>
-            <div class="footer">
-              <p>This message was sent from your portfolio contact form at ${new Date().toLocaleString()}</p>
-              <p>Reply directly to this email to respond to ${data.name}</p>
-            </div>
-          </div>
-        </body>
-      </html>
-    `,
-    text: `
-New Contact Form Submission
-
-Name: ${data.name}
-Email: ${data.email}
-Phone: ${data.phone}
-Budget (KSh): ${data.budget}
-Subject: ${data.subject}
-
-Message:
-${data.message}
-
-Sent at: ${new Date().toLocaleString()}
-    `
+      <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#fbfaf7;padding:32px;">
+        <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e4e1d8;border-radius:12px;padding:32px;">
+          <p style="margin:0 0 4px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7c827c;">New enquiry</p>
+          <h1 style="margin:0 0 24px;font-size:22px;color:#101211;font-weight:600;">${escapeHtml(data.name)}</h1>
+          <table style="width:100%;border-collapse:collapse;">
+            ${row("Email", data.email)}
+            ${row("Organisation", data.organisation)}
+            ${row("Phone", data.phone)}
+            ${row("Needs", data.projectType)}
+            ${row("Budget", data.budget)}
+            ${row("Timeline", data.timeline)}
+            ${row("Found via", data.referral)}
+            ${row("Problem", data.message)}
+          </table>
+          <p style="margin:24px 0 0;font-size:12px;color:#7c827c;">
+            Reply to this email to answer ${escapeHtml(data.name)} directly.
+          </p>
+        </div>
+      </div>`,
+    text: [
+      `New enquiry — ${data.name}`,
+      `Email: ${data.email}`,
+      data.organisation && `Organisation: ${data.organisation}`,
+      data.phone && `Phone: ${data.phone}`,
+      data.projectType && `Needs: ${data.projectType}`,
+      data.budget && `Budget: ${data.budget}`,
+      data.timeline && `Timeline: ${data.timeline}`,
+      data.referral && `Found via: ${data.referral}`,
+      "",
+      "Problem:",
+      data.message,
+    ]
+      .filter(Boolean)
+      .join("\n"),
   };
-};
+}
+
+function confirmationEmail(name: string) {
+  const safeName = escapeHtml(name);
+  return {
+    subject: "Got your message — Mumo Mwangangi",
+    html: `
+      <div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#fbfaf7;padding:32px;">
+        <div style="max-width:560px;margin:0 auto;background:#ffffff;border:1px solid #e4e1d8;border-radius:12px;padding:32px;color:#101211;">
+          <p style="margin:0 0 20px;font-size:15px;">Hi ${safeName},</p>
+          <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#4e544f;">
+            Thanks for getting in touch. Your message has reached me and I read
+            every enquiry myself — you will hear back within two working days.
+          </p>
+          <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#4e544f;">
+            If it is urgent, WhatsApp is faster:
+            <a href="https://wa.me/${site.whatsapp}" style="color:#0b5d42;">${site.phone}</a>.
+          </p>
+          <p style="margin:24px 0 0;font-size:15px;">
+            Mumo Mwangangi<br>
+            <span style="color:#7c827c;font-size:13px;">${site.role} · ${site.location}</span>
+          </p>
+        </div>
+      </div>`,
+    text: `Hi ${name},
+
+Thanks for getting in touch. Your message has reached me and I read every enquiry myself — you will hear back within two working days.
+
+If it is urgent, WhatsApp is faster: ${site.phone}
+
+Mumo Mwangangi
+${site.role} · ${site.location}`,
+  };
+}
 
 export async function POST(req: NextRequest) {
   try {
     const json = await req.json();
     const parsed = contactSchema.safeParse(json);
-    
+
     if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+      return NextResponse.json(
+        { error: "Some fields were not accepted. Please check and try again." },
+        { status: 400 },
+      );
     }
 
-    // Honeypot check
+    // Honeypot: accept silently so the bot does not learn it was caught.
     if (parsed.data.website) {
       return NextResponse.json({ ok: true });
     }
 
-    // Check if SMTP is configured
     if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-      console.error("SMTP Configuration Missing:", {
-        host: process.env.SMTP_HOST ? 'SET' : 'MISSING',
-        user: process.env.SMTP_USER ? 'SET' : 'MISSING',
-        pass: process.env.SMTP_PASS ? 'SET' : 'MISSING'
+      console.error("SMTP is not configured — enquiry not delivered:", {
+        name: parsed.data.name,
+        email: parsed.data.email,
       });
-      console.log("Contact submission (SMTP not configured):", parsed.data);
-      return NextResponse.json({ 
-        error: "Email service is temporarily unavailable. Please contact me directly at +254 110 018 735 or mskmumo@gmail.com" 
-      }, { status: 500 });
+      return NextResponse.json(
+        { error: `The contact form is temporarily unavailable. ${FALLBACK}` },
+        { status: 503 },
+      );
     }
 
+    const transporter = createTransporter();
+    const notification = notificationEmail(parsed.data);
+
+    await transporter.sendMail({
+      from: `"Portfolio enquiry" <${process.env.SMTP_FROM}>`,
+      to: process.env.SMTP_TO,
+      replyTo: parsed.data.email,
+      subject: notification.subject,
+      html: notification.html,
+      text: notification.text,
+    });
+
+    // The confirmation is a courtesy — never fail the request over it, or the
+    // sender is told their enquiry failed after it already arrived.
     try {
-      console.log("Creating SMTP transporter...");
-      // Create transporter
-      const transporter = createTransporter();
-
-      console.log("Verifying SMTP connection...");
-      // Verify connection configuration
-      await transporter.verify();
-      console.log("SMTP connection verified successfully");
-
-      // Create email content
-      const emailTemplate = createEmailTemplate(parsed.data);
-
-      console.log("Sending notification email...");
-      // Send email to you
-      await transporter.sendMail({
-        from: `"Portfolio Contact Form" <${process.env.SMTP_FROM}>`,
-        to: process.env.SMTP_TO,
-        replyTo: parsed.data.email,
-        subject: emailTemplate.subject,
-        html: emailTemplate.html,
-      });
-      console.log("Notification email sent successfully");
-
-      console.log("Sending confirmation email to client...");
-      // Send confirmation email to client
+      const confirmation = confirmationEmail(parsed.data.name);
       await transporter.sendMail({
         from: `"Mumo Mwangangi" <${process.env.SMTP_FROM}>`,
         to: parsed.data.email,
-        subject: "Thank you for contacting me!",
-        html: `
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <meta charset="utf-8">
-              <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
-                .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
-                .footer { text-align: center; margin-top: 20px; color: #666; font-size: 14px; }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <div class="header">
-                  <h2>✨ Thank You for Reaching Out!</h2>
-                </div>
-                <div class="content">
-                  <p>Hi <strong>${parsed.data.name}</strong>,</p>
-                  
-                  <p>Thank you for contacting me through my portfolio website. I've received your message and I'm excited to learn more about your project!</p>
-                  
-                  <p><strong>Here's what happens next:</strong></p>
-                  <ul>
-                    <li>🔍 I'll review your message and project requirements</li>
-                    <li>📞 I'll get back to you within 24 hours</li>
-                    <li>💡 We can schedule a call to discuss your needs in detail</li>
-                  </ul>
-                  
-                  <p>In the meantime, feel free to check out my latest work and connect with me on social media.</p>
-                  
-                  <div style="text-align: center;">
-                    <a href="https://wa.me/254110018735?text=Hi%20Mumo,%20I%20just%20submitted%20a%20contact%20form%20on%20your%20website" class="cta">💬 Chat on WhatsApp</a>
-                  </div>
-                  
-                  <p>Looking forward to working together!</p>
-                  
-                  <p>Best regards,<br>
-                  <strong>Mumo Mwangangi</strong><br>
-                  Software Developer & Data Analyst</p>
-                </div>
-                <div class="footer">
-                  <p>This is an automated confirmation. Please don't reply to this email.</p>
-                  <p>For urgent matters, call me at +254 110 018 735</p>
-                </div>
-              </div>
-            </body>
-          </html>
-        `,
-        text: `
-Hi ${parsed.data.name},
-
-Thank you for contacting me through my portfolio website. I've received your message and I'm excited to learn more about your project!
-
-Here's what happens next:
-- I'll review your message and project requirements
-- I'll get back to you within 24 hours  
-- We can schedule a call to discuss your needs in detail
-
-Looking forward to working together!
-
-Best regards,
-Mumo Mwangangi
-Software Developer & Data Analyst
-
-For urgent matters, call me at +254 110 018 735
-        `
+        subject: confirmation.subject,
+        html: confirmation.html,
+        text: confirmation.text,
       });
-
-      console.log("Email sent successfully to:", process.env.SMTP_TO);
-      return NextResponse.json({ 
-        ok: true, 
-        message: "Message sent successfully! I'll get back to you soon." 
-      });
-
-    } catch (emailError) {
-      console.error("Email sending error:", emailError);
-      console.error("Error details:", {
-        message: emailError instanceof Error ? emailError.message : 'Unknown error',
-        stack: emailError instanceof Error ? emailError.stack : 'No stack trace',
-        env: {
-          host: process.env.SMTP_HOST,
-          port: process.env.SMTP_PORT,
-          user: process.env.SMTP_USER ? 'SET' : 'NOT SET',
-          pass: process.env.SMTP_PASS ? 'SET' : 'NOT SET'
-        }
-      });
-      
-      // Provide helpful error message based on error type
-      let userMessage = "Failed to send email. Please try again or contact me directly at +254 110 018 735";
-      
-      if (emailError instanceof Error) {
-        if (emailError.message.includes('authentication') || emailError.message.includes('login')) {
-          userMessage = "Email authentication failed. Please contact me directly at +254 110 018 735 or mskmumo@gmail.com";
-        } else if (emailError.message.includes('network') || emailError.message.includes('timeout')) {
-          userMessage = "Network error occurred. Please try again in a moment or contact me at +254 110 018 735";
-        }
-      }
-      
-      return NextResponse.json({ 
-        error: userMessage,
-        details: process.env.NODE_ENV === 'development' ? (emailError instanceof Error ? emailError.message : 'Unknown error') : undefined
-      }, { status: 500 });
+    } catch (confirmationError) {
+      console.error("Confirmation email failed (enquiry was delivered):", confirmationError);
     }
 
+    return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error("Server error:", error);
-    return NextResponse.json({ 
-      error: "Server error. Please try again later." 
-    }, { status: 500 });
+    console.error("Contact route error:", error);
+    return NextResponse.json(
+      { error: `That did not send. ${FALLBACK}` },
+      { status: 500 },
+    );
   }
 }
-
-

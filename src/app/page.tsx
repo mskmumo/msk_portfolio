@@ -1,27 +1,30 @@
 import { Hero } from "@/components/Hero";
-import { personJsonLd } from "@/lib/seo";
+import { SelectedWork } from "@/components/SelectedWork";
+import { Services } from "@/components/Services";
+import { Process } from "@/components/Process";
 import { AboutSection } from "@/components/AboutSection";
-import { Skills } from "@/components/Skills";
-import { FeaturedProjects } from "@/components/FeaturedProjects";
-import { Experience } from "@/components/Experience";
-import { Education } from "@/components/Education";
-import { ServicesSection } from "@/components/ServicesSection";
-import { Testimonials } from "@/components/Testimonials";
+import { TrackRecord } from "@/components/TrackRecord";
 import { ContactCTA } from "@/components/ContactCTA";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
+/**
+ * Section order is deliberately proof-first.
+ *
+ * A visitor deciding whether to hire someone wants evidence before offers and
+ * offers before biography. Experience and education sit below the pitch — they
+ * confirm the story rather than open it.
+ */
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }} />
       <Hero />
+      <SelectedWork />
+      <Services />
+      <Process />
       <AboutSection />
-      <Skills />
-      <FeaturedProjects />
-      <Experience />
-      <Education />
-      <ServicesSection />
-      <Testimonials />
+      <TrackRecord />
       <ContactCTA />
+      <WhatsAppButton />
     </>
   );
 }

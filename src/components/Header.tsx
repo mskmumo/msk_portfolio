@@ -1,216 +1,163 @@
 "use client";
 
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ContactModal } from "@/components/ContactModal";
+import { EASE } from "@/components/ui/Reveal";
+import { nav, site } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Close menu when clicking outside or on escape
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMenuOpen(false);
-    };
-    
-    if (isMenuOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
-    } else {
-      document.body.style.overflow = 'unset';
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    if (open) {
+      document.addEventListener("keydown", onKey);
+      document.body.style.overflow = "hidden";
     }
-
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
     };
-  }, [isMenuOpen]);
-
-  const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#education", label: "Education" },
-    { href: "#testimonials", label: "Testimonials" },
-    { href: "#contact", label: "Contact" }
-  ];
-
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-  };
-
-  const handleContactClick = () => {
-    setIsContactModalOpen(true);
-    setIsMenuOpen(false);
-  };
+  }, [open]);
 
   return (
     <>
-    <header className="sticky top-0 z-40 w-full backdrop-blur-sm bg-card-bg/80 dark:bg-background/80 border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative">
-            <Image
-              src="/logo.svg"
-              alt="Mumo Mwangangi Logo"
-              width={40}
-              height={40}
-              className="transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
-          <span className="font-bold tracking-tight text-xl text-foreground group-hover:text-primary transition-colors duration-300">
-            Mumo Mwangangi
-          </span>
-        </Link>
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {navLinks.slice(0, -1).map((link) => (
-            <Link 
-              key={link.href}
-              href={link.href} 
-              className="text-foreground hover:text-primary transition-colors duration-300 relative group"
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          ))}
-          <ThemeToggle />
-              <button 
-                onClick={handleContactClick}
-                className="inline-flex items-center justify-center rounded-full px-6 py-2 bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                Contact
-              </button>
-        </nav>
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-foreground hover:text-primary transition-colors duration-300 p-2"
-            aria-label="Toggle menu"
+      <header
+        className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
+          scrolled
+            ? "border-b border-border bg-background/85 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
+          <Link
+            href="/"
+            className="group flex items-baseline gap-3"
+            aria-label={`${site.name} — home`}
           >
-            <motion.div
-              animate={isMenuOpen ? "open" : "closed"}
-              className="w-6 h-6 flex flex-col justify-center items-center"
-            >
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: 45, y: 6 }
-                }}
-                className="w-6 h-0.5 bg-current block transform transition-all duration-300"
-              />
-              <motion.span
-                variants={{
-                  closed: { opacity: 1 },
-                  open: { opacity: 0 }
-                }}
-                className="w-6 h-0.5 bg-current block mt-1.5 transition-all duration-300"
-              />
-              <motion.span
-                variants={{
-                  closed: { rotate: 0, y: 0 },
-                  open: { rotate: -45, y: -6 }
-                }}
-                className="w-6 h-0.5 bg-current block mt-1.5 transform transition-all duration-300"
-              />
-            </motion.div>
-          </button>
-        </div>
-      </div>
-    </header>
+            <span className="text-[0.95rem] font-medium tracking-[-0.01em] text-foreground">
+              {site.name}
+            </span>
+            <span className="eyebrow hidden transition-colors group-hover:text-primary sm:inline">
+              BI &amp; Systems
+            </span>
+          </Link>
 
-    {/* Mobile Menu Overlay */}
-    <AnimatePresence>
-      {isMenuOpen && (
-        <>
-          {/* Backdrop */}
+          {/* Every hash target goes through AnchorLink — next/link alone
+              treats a hash href as a soft navigation that often lands without
+              scrolling, which makes the nav look broken. */}
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+            {nav.map((item) => (
+              <AnchorLink
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3.5 py-2 text-sm text-neutral transition-colors duration-200 hover:bg-surface-2 hover:text-foreground"
+              >
+                {item.label}
+              </AnchorLink>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2.5">
+            <ThemeToggle />
+            <AnchorLink
+              href="/#contact"
+              className="btn btn-primary hidden h-9 px-4 text-sm sm:inline-flex"
+              onClick={() =>
+                trackEvent("cta_click", { location: "header", label: "start_project" })
+              }
+            >
+              Start a project
+            </AnchorLink>
+
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-border-strong md:hidden"
+            >
+              <span className="relative block h-3 w-4">
+                <span
+                  className={`absolute left-0 block h-px w-4 bg-current transition-all duration-300 ease-[cubic-bezier(0.2,0.6,0.2,1)] ${
+                    open ? "top-1.5 rotate-45" : "top-0"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 block h-px w-4 bg-current transition-all duration-300 ease-[cubic-bezier(0.2,0.6,0.2,1)] ${
+                    open ? "top-1.5 -rotate-45" : "top-3"
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsMenuOpen(false)}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
-          />
-          
-          {/* Menu Panel */}
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-card-bg dark:bg-card-bg shadow-2xl z-50 md:hidden"
+            transition={{ duration: 0.25, ease: EASE }}
+            className="fixed inset-0 top-[4.5rem] z-40 bg-background md:hidden"
           >
-            <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-border">
-                <span className="font-bold text-lg text-foreground">Menu</span>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-foreground hover:text-primary transition-colors duration-300"
-                  aria-label="Close menu"
+            <nav className="container-page flex flex-col py-8" aria-label="Mobile">
+              {nav.map((item, i) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.04 * i, duration: 0.35, ease: EASE }}
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              
-              {/* Navigation Links */}
-              <nav className="flex-1 px-6 py-8">
-                <div className="space-y-6">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      {link.href === "#contact" ? (
-                        <button
-                          onClick={handleContactClick}
-                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2 w-full text-left"
-                        >
-                          {link.label}
-                        </button>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          onClick={handleLinkClick}
-                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors duration-300 py-2"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </nav>
-              
-              {/* Footer */}
-              <div className="p-6 border-t border-border">
-                <p className="text-sm text-neutral text-center">
-                  © 2024 Mumo Mwangangi
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+                  <AnchorLink
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block border-b border-border py-5 font-display text-3xl text-foreground"
+                  >
+                    {item.label}
+                  </AnchorLink>
+                </motion.div>
+              ))}
 
-    <ContactModal 
-      isOpen={isContactModalOpen} 
-      onClose={() => setIsContactModalOpen(false)} 
-    />
+              <div className="mt-10 flex flex-col gap-3">
+                <AnchorLink
+                  href="/#contact"
+                  onClick={() => setOpen(false)}
+                  className="btn btn-primary w-full"
+                >
+                  Start a project
+                </AnchorLink>
+                <a
+                  href={site.cvPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary w-full"
+                >
+                  Download CV
+                </a>
+              </div>
+
+              <p className="mono-meta mt-10">
+                {site.email} · {site.phone}
+              </p>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
-
-

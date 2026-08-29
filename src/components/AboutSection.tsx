@@ -1,152 +1,124 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import Image from "next/image";
-import Link from "next/link";
-import { trackEvent } from "@/lib/analytics";
+import { Section } from "@/components/ui/Section";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { capabilities, languages, site } from "@/lib/site";
+
 export function AboutSection() {
   return (
-    <section id="about" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-background">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left side - Image and social */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            className="space-y-6"
-          >
-            <div className="relative w-full max-w-sm mx-auto">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-primary/20 to-secondary/20 p-2">
-                <div className="w-full h-full rounded-xl overflow-hidden bg-card-bg">
-                  <Image
-                    src="/pic_1.jpg"
-                    alt="Mumo Mwangangi - Professional Profile"
-                    width={300}
-                    height={300}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+    <Section
+      id="about"
+      tone="recessed"
+      eyebrow="04 — About"
+      title="I sit on both sides of the line"
+    >
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
+        <Reveal className="lg:col-span-5">
+          <figure>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-background">
+              <Image
+                src="/pic_1.jpg"
+                alt={`${site.name} working in Nairobi`}
+                fill
+                sizes="(min-width: 1024px) 420px, 90vw"
+                className="object-cover"
+              />
             </div>
-            
-            {/* Social links */}
-            <div className="flex justify-center space-x-4">
-              {[
-                { name: "LinkedIn", href: "https://www.linkedin.com/in/mumo-mwangangi-6750b027a", icon: "/icons/linkedin-logo.png" },
-                { name: "GitHub", href: "https://github.com/mskmumo", icon: "/icons/github-logo.png" },
-                { name: "Instagram", href: "https://instagram.com/mumo_realg", icon: "/icons/instagram-logo.gif" },
-                { name: "Twitter", href: "https://twitter.com/mumorealg", icon: "/icons/x-logo.png" },
-                { name: "Email", href: "mailto:mskmumo@gmail.com", icon: "/icons/gmail-logo.png" },
-              ].map((social, index) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all duration-200 hover:scale-110 p-2"
-                  onClick={() => trackEvent("social_click", { platform: social.name })}
-                  title={social.name}
-                >
-                  <Image
-                    src={social.icon}
-                    alt={`${social.name} icon`}
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 object-contain"
-                    unoptimized={social.icon.endsWith('.gif')}
-                  />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+            <figcaption className="mono-meta mt-4 border-t border-border pt-4">
+              Nairobi, Kenya · Building since 2023
+            </figcaption>
+          </figure>
 
-          {/* Right side - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-                I am Professional{" "}
-                <span className="text-primary">Business Intelligence</span> Engineer
-              </h2>
-              <p className="text-neutral dark:text-neutral text-base sm:text-lg leading-relaxed mb-4">
-                I design and develop services for customers specializing in creating stylish, modern 
-                websites, web services and online stores. My passion is to design digital user experiences 
-                that transform data into actionable insights.
+          <dl className="mt-8 space-y-3">
+            <div className="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+              <dt className="eyebrow">Currently</dt>
+              <dd className="text-right text-sm text-foreground">
+                Data Analytics Intern, Strathmore University
+              </dd>
+            </div>
+            <div className="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+              <dt className="eyebrow">Studying</dt>
+              <dd className="text-right text-sm text-foreground">
+                BSc Business IT, third year
+              </dd>
+            </div>
+            <div className="flex items-baseline justify-between gap-4">
+              <dt className="eyebrow">Languages</dt>
+              <dd className="text-right text-sm text-foreground">
+                {languages.map((l) => l.name).join(" · ")}
+              </dd>
+            </div>
+          </dl>
+        </Reveal>
+
+        <div className="lg:col-span-7">
+          <Reveal>
+            <div className="space-y-5 text-[1.0625rem] leading-relaxed text-neutral">
+              <p className="pretty">
+                Most people in this work sit on one side of a line. Analysts get
+                handed a database somebody else designed and make the best of
+                it. Developers ship the system and hand the reporting problem to
+                someone else. I do both — which mostly means I know where the
+                numbers go wrong before they ever reach a chart.
               </p>
-              <p className="text-neutral dark:text-neutral text-base sm:text-lg leading-relaxed">
-                I design and develop services for customers specializing in creating stylish, modern 
-                websites, web services and interactive dashboards that drive business growth.
+              <p className="pretty">
+                I am a Business Information Technology student at Strathmore
+                University, third year on the evening programme, and I have been
+                building since 2023. In January 2025 I joined the Office of
+                Faculty Affairs as their data analytics intern, where I own the
+                BI layer for the Staff Establishment System — the Power BI
+                dashboard HR uses to see staffing across every faculty. It is
+                the work I am proudest of, largely because people who are not me
+                open it on purpose.
+              </p>
+              <p className="pretty">
+                Alongside that I build in Laravel: a rental system with M-Pesa
+                payments, a blockchain credential-verification prototype, and
+                internal tools for faculty workflows. Evening classes, daytime
+                work and the projects in between — the schedule is exactly why I
+                am strict about scope.
               </p>
             </div>
 
-            {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="#projects" 
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl"
-                onClick={() => trackEvent("cta_click", { location: "about", label: "my_projects" })}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <AnchorLink href="#contact" className="btn btn-primary">
+                Work with me
+              </AnchorLink>
+              <a
+                href={site.cvPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
               >
-                My Projects
-              </Link>
-                <Link 
-                  href="/MMwangangi_CV_1.pdf" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-200"
-                onClick={() => trackEvent("cta_click", { location: "about", label: "download_cv" })}
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
                 Download CV
-              </Link>
+              </a>
             </div>
+          </Reveal>
 
-            {/* Skills tags */}
-            <div className="pt-4">
-              <h3 className="text-lg font-semibold text-foreground mb-3">Technologies I Work With</h3>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "Power BI",
-                  "Laravel (PHP)",
-                  "Next.js",
-                  "TypeScript",
-                  "Tailwind CSS",
-                  "Framer Motion",
-                  "DAX",
-                  "SQL",
-                  "Python",
-                  "React",
-                  "Node.js",
-                ].map((tech) => (
-                  <motion.span 
-                    key={tech}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ type: "spring", stiffness: 200 }}
-                    viewport={{ once: true }}
-                    className="text-sm rounded-full px-4 py-2 bg-primary/10 text-primary border border-primary/20 font-medium hover:bg-primary/20 transition-colors duration-200"
-                  >
-                    {tech}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          <Reveal delay={0.06} className="mt-14">
+            <p className="eyebrow">What I work with</p>
+            {/* Grouped capabilities rather than self-scored percentage bars.
+                Nobody believes "React 95%", and a technical reviewer reads it
+                as a junior signal. */}
+            <RevealGroup className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+              {capabilities.map((group) => (
+                <RevealItem key={group.group}>
+                  <h3 className="border-b border-border pb-3 text-sm font-medium text-foreground">
+                    {group.group}
+                  </h3>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <li key={item} className="tag">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </Reveal>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
-
-

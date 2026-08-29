@@ -1,21 +1,25 @@
-import { MetadataRoute } from "next";
-import { site } from "@/lib/seo";
+import type { MetadataRoute } from "next";
+import { site } from "@/lib/site";
 import { getAllProjects } from "@/lib/projects";
 
+/**
+ * Only routes that exist.
+ *
+ * The previous sitemap listed /about, /services and /contact, none of which
+ * were real pages — a sitemap full of 404s costs crawl budget and trust.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = site.url.replace(/\/$/, "");
-  const routes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, lastModified: new Date() },
-    { url: `${base}/work`, lastModified: new Date() },
-    { url: `${base}/about`, lastModified: new Date() },
-    { url: `${base}/services`, lastModified: new Date() },
-    { url: `${base}/contact`, lastModified: new Date() },
+  const base = site.url;
+  const now = new Date();
+
+  return [
+    { url: `${base}/`, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: `${base}/work`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...getAllProjects().map((project) => ({
+      url: `${base}/work/${project.slug}`,
+      lastModified: now,
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
+    })),
   ];
-  const projects = getAllProjects();
-  projects.forEach((p) => {
-    routes.push({ url: `${base}/work/${p.slug}`, lastModified: new Date() });
-  });
-  return routes;
 }
-
-

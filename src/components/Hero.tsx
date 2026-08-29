@@ -1,133 +1,162 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { EASE } from "@/components/ui/Reveal";
+import { proofPoints, site } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 
 export function Hero() {
+  const reduced = useReducedMotion();
+
+  const rise = (delay: number) =>
+    reduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 18 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.7, delay, ease: EASE },
+        };
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 relative overflow-hidden bg-background min-h-[90vh] flex items-center">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
-      
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative w-full">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left side - Content */}
-          <div className="space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 120, damping: 14 }}
-              className="space-y-6"
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                Hello, I&apos;m{" "}
-                <span className="text-primary">Mumo Mwangangi</span>
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl text-neutral dark:text-neutral max-w-2xl leading-relaxed">
-                I&apos;m a Software Developer and Data Analyst based in Kenya. I bridge the gap between code and insights, 
-                building intelligent applications while transforming complex data into strategic business solutions that drive measurable impact.
-              </p>
-              
-              <div className="bg-card-bg border border-border rounded-xl p-6 space-y-4">
-                <h3 className="text-lg font-semibold text-foreground">What Sets Me Apart:</h3>
-                <ul className="space-y-3 text-neutral dark:text-neutral">
-                  <li className="flex items-start space-x-3">
-                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Unique blend of software engineering rigor and analytical thinking</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Strong communication skills for translating technical concepts to stakeholders</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Passion for continuous learning and adopting emerging technologies</span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Creative problem-solving with a focus on delivering measurable business value</span>
-                  </li>
-                </ul>
-              </div>
+    <section className="relative overflow-hidden pt-14 sm:pt-20 lg:pt-24">
+      <div className="container-page relative">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-7">
+            <motion.div {...rise(0)} className="flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              <span className="eyebrow">
+                Available for projects · {site.location}
+              </span>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, type: "spring", stiffness: 120, damping: 14 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+            <motion.h1
+              {...rise(0.06)}
+              className="display-xl mt-7 text-foreground balance"
             >
-              <Link 
-                href="#contact" 
-                className="inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl text-sm sm:text-base" 
-                onClick={() => trackEvent("cta_click", { location: "hero", label: "say_hello" })}
-              >
-                Say Hello!
-              </Link>
-              <Link 
-                href="#projects" 
-                className="inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3 sm:py-4 border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-200 text-sm sm:text-base" 
-                onClick={() => trackEvent("cta_click", { location: "hero", label: "view_projects" })}
-              >
-                View Projects
-              </Link>
-            </motion.div>
+              I build the systems that produce your data
+              <span className="text-muted"> — </span>
+              and the dashboards that{" "}
+              <em className="italic text-primary">decide</em> on it.
+            </motion.h1>
 
-            {/* Stats */}
+            <motion.p {...rise(0.14)} className="lede mt-7 pretty">
+              {site.pitch}
+            </motion.p>
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 120, damping: 14 }}
-              className="grid grid-cols-3 gap-3 sm:gap-6 pt-6 sm:pt-8"
+              {...rise(0.2)}
+              className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">5+</div>
-                <div className="text-xs sm:text-sm text-muted dark:text-muted">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">50+</div>
-                <div className="text-xs sm:text-sm text-muted dark:text-muted">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">25+</div>
-                <div className="text-xs sm:text-sm text-muted dark:text-muted">Happy Clients</div>
-              </div>
+              {/* Same-page anchors use a native <a>, not next/link: the App
+                  Router treats a hash href as a soft navigation and often
+                  lands without scrolling, so the button appears dead. */}
+              <AnchorLink
+                href="#contact"
+                className="btn btn-primary"
+                onClick={() =>
+                  trackEvent("cta_click", { location: "hero", label: "start_project" })
+                }
+              >
+                Start a project
+              </AnchorLink>
+              <AnchorLink
+                href="#work"
+                className="btn btn-secondary"
+                onClick={() =>
+                  trackEvent("cta_click", { location: "hero", label: "selected_work" })
+                }
+              >
+                See selected work
+              </AnchorLink>
+              <a
+                href={site.cvPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost sm:ml-1"
+                onClick={() =>
+                  trackEvent("cta_click", { location: "hero", label: "download_cv" })
+                }
+              >
+                Download CV
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2.5v8M4.5 7.5 8 11l3.5-3.5M2.5 13.5h11" />
+                </svg>
+              </a>
             </motion.div>
           </div>
 
-          {/* Right side - Image */}
+          {/* Portrait, treated as an editorial plate rather than an avatar. */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 120, damping: 14 }}
-            className="relative order-first lg:order-last"
+            {...rise(0.26)}
+            className="lg:col-span-5 lg:pt-2"
           >
-            <div className="relative w-full max-w-sm sm:max-w-md mx-auto">
-              <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl bg-gradient-to-br from-primary/20 to-secondary/20 p-1.5 sm:p-2">
-                <div className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-card-bg">
-                  <Image
-                    src="/pic_3.jpg"
-                    alt="Mumo Mwangangi - Business Intelligence Engineer"
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover"
-                    priority
-                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 400px"
-                  />
-                </div>
+            <figure className="relative mx-auto max-w-sm lg:max-w-none">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-surface-2">
+                <Image
+                  src="/pic_3.jpg"
+                  alt={`${site.name}, ${site.role}, in Nairobi`}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 420px, (min-width: 640px) 384px, 90vw"
+                  className="object-cover"
+                />
               </div>
-              
-              {/* Floating elements */}
-              <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-6 sm:w-8 h-6 sm:h-8 bg-primary rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-4 sm:w-6 h-4 sm:h-6 bg-secondary rounded-full animate-pulse delay-1000"></div>
-            </div>
+              <figcaption className="mt-4 flex items-start justify-between gap-4 border-t border-border pt-4">
+                <div>
+                  <p className="text-sm font-medium text-foreground">{site.name}</p>
+                  <p className="mono-meta mt-1">{site.role}</p>
+                </div>
+                <p className="mono-meta shrink-0 text-right">
+                  Nairobi
+                  <br />
+                  KE
+                </p>
+              </figcaption>
+            </figure>
           </motion.div>
         </div>
+
+        {/* Credibility strip. Every number traces to a line in the CV, and the
+            source is printed underneath so it is checkable. */}
+        <motion.dl
+          {...rise(0.34)}
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:mt-20 lg:grid-cols-4"
+        >
+          {proofPoints.map((point) => (
+            // col-reverse puts the value on top visually while keeping the
+            // term before its description in the DOM, so a screen reader gets
+            // "manual reporting removed: 40%" rather than the label twice.
+            <div
+              key={point.label}
+              className="flex flex-col-reverse gap-3 bg-background p-5 sm:p-6"
+            >
+              <dt>
+                <span className="block text-sm font-medium text-foreground">
+                  {point.label}
+                </span>
+                <span className="mono-meta mt-1.5 block">{point.note}</span>
+              </dt>
+              <dd className="font-display text-3xl leading-none text-foreground tabular sm:text-4xl">
+                {point.value}
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
       </div>
     </section>
   );
 }
-
-
