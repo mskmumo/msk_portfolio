@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { contactSchema, type ContactInput } from "@/lib/validation";
+import {
+  canEmailVisitors,
+  isEmailConfigured,
+  notificationRecipient,
+  sendEmail,
+} from "@/lib/email";
 import { site } from "@/lib/site";
 
 /**
@@ -17,15 +22,7 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
-const createTransporter = () =>
-  nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number.parseInt(process.env.SMTP_PORT || "587", 10),
-    secure: process.env.SMTP_PORT === "465",
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-  });
-
-const FALLBACK = `Please email ${site.email} or call ${site.phone} directly.`;
+const FALLBACK = `Please email ${site.email} or WhatsApp ${site.phone} directly.`;
 
 function row(label: string, value?: string) {
   if (!value) return "";
@@ -127,10 +124,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
-    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-      console.error("SMTP is not configured — enquiry not delivered:", {
+    if (!isEmailConfigured()) {
+      // Log the enquiry so it is at least recoverable from the Worker tail.
+      console.error("RESEND_API_KEY is not set — enquiry not delivered:", {
         name: parsed.data.name,
         email: parsed.data.email,
+        message: parsed.data.message,
       });
       return NextResponse.json(
         { error: `The contact form is temporarily unavailable. ${FALLBACK}` },
@@ -138,31 +137,42 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const transporter = createTransporter();
     const notification = notificationEmail(parsed.data);
-
-    await transporter.sendMail({
-      from: `"Portfolio enquiry" <${process.env.SMTP_FROM}>`,
-      to: process.env.SMTP_TO,
-      replyTo: parsed.data.email,
+    const delivered = await sendEmail({
+      to: notificationRecipient(),
       subject: notification.subject,
       html: notification.html,
       text: notification.text,
+      replyTo: parsed.data.email,
     });
 
-    // The confirmation is a courtesy — never fail the request over it, or the
-    // sender is told their enquiry failed after it already arrived.
-    try {
+    if (!delivered.ok) {
+      console.error("Enquiry delivery failed:", delivered, {
+        name: parsed.data.name,
+        email: parsed.data.email,
+        message: parsed.data.message,
+      });
+      return NextResponse.json(
+        { error: `That did not send. ${FALLBACK}` },
+        { status: 502 },
+      );
+    }
+
+    // Courtesy confirmation. Skipped when only the provider's test sender is
+    // available, since that cannot deliver to anyone but the account owner.
+    // Never fails the request — the enquiry has already arrived.
+    if (canEmailVisitors()) {
       const confirmation = confirmationEmail(parsed.data.name);
-      await transporter.sendMail({
-        from: `"Mumo Mwangangi" <${process.env.SMTP_FROM}>`,
+      const ack = await sendEmail({
         to: parsed.data.email,
         subject: confirmation.subject,
         html: confirmation.html,
         text: confirmation.text,
+        replyTo: site.email,
       });
-    } catch (confirmationError) {
-      console.error("Confirmation email failed (enquiry was delivered):", confirmationError);
+      if (!ack.ok) {
+        console.error("Confirmation email failed (enquiry was delivered):", ack);
+      }
     }
 
     return NextResponse.json({ ok: true });

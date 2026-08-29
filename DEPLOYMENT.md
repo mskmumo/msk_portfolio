@@ -1,74 +1,78 @@
-# 🚀 Deployment Guide for Vercel
+# Deployment
 
-## 📧 Email Configuration
+Target: **Cloudflare Workers** (`*.workers.dev`).
 
-### Environment Variables Required:
+> **Security note.** An earlier version of this file contained a real Gmail app
+> password in plaintext and was committed to a GitHub repository. That
+> credential must be treated as compromised — revoke it at
+> <https://myaccount.google.com/apppasswords>. Never put a secret in this file;
+> secrets belong in `wrangler secret put` or the Cloudflare dashboard.
 
-Add these to your Vercel project settings:
+---
+
+## Why the contact form does not use SMTP
+
+Cloudflare Workers run on a V8 isolate, not Node. There is no `net`, `tls` or
+`dgram` module, so **no SMTP library — nodemailer included — can work there**,
+with or without `nodejs_compat`. Outbound mail has to go over an HTTP API
+called with `fetch`.
+
+The form therefore sends through [Resend](https://resend.com). All provider
+logic lives in `src/lib/email.ts`; swapping to SendGrid, Postmark or Cloudflare
+Email Service means adding a case there and changing nothing else.
+
+---
+
+## Environment variables
+
+Set these as Worker secrets, not as plaintext vars:
 
 ```bash
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=mumo.mwangangi@strathmore.edu
-SMTP_PASS=pyzx jggp lqaj rvxn
-SMTP_FROM=mumo.mwangangi@strathmore.edu
-SMTP_TO=mumo.mwangangi@strathmore.edu
+npx wrangler secret put RESEND_API_KEY
 ```
 
-### Steps to Configure in Vercel:
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `RESEND_API_KEY` | **Yes** | Resend API key (`re_…`). Without it the form returns 503 and tells the visitor to email directly. |
+| `CONTACT_TO` | No | Where enquiries land. Defaults to `mskmumo@gmail.com`. |
+| `CONTACT_FROM` | No | Verified sender, e.g. `Mumo Mwangangi <hello@yourdomain.com>`. Until a domain is verified, leave unset. |
+| `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical origin for metadata, sitemap, robots and JSON-LD, e.g. `https://mumo.workers.dev`. |
 
-1. **Go to Vercel Dashboard:**
-   - Visit [vercel.com](https://vercel.com)
-   - Select your project
+### The `CONTACT_FROM` caveat
 
-2. **Navigate to Settings:**
-   - Click the "Settings" tab
-   - Click "Environment Variables" in the sidebar
+With no verified domain, Resend falls back to its test sender
+`onboarding@resend.dev`, which **only delivers to the Resend account owner**.
 
-3. **Add Variables:**
-   - Click "Add New"
-   - Enter variable name (e.g., `SMTP_HOST`)
-   - Enter variable value (e.g., `smtp.gmail.com`)
-   - Select environments: Production, Preview, Development
-   - Click "Save"
+- Enquiry notifications to you: **work immediately**, no domain needed.
+- The courtesy confirmation back to the visitor: **skipped**, because it would
+  bounce. `canEmailVisitors()` in `src/lib/email.ts` gates this deliberately.
 
-4. **Repeat for All Variables:**
-   - Add all 6 SMTP variables listed above
+Verify a domain in Resend and set `CONTACT_FROM` to switch confirmations on.
 
-5. **Redeploy:**
-   - Go to "Deployments" tab
-   - Click "..." on latest deployment
-   - Click "Redeploy"
+---
 
-### 🔍 Troubleshooting:
+## Setup checklist
 
-**If emails still don't work:**
+1. Create a Resend account, generate an API key, and confirm the account email
+   is the address you want enquiries to reach.
+2. `npx wrangler secret put RESEND_API_KEY`
+3. Set `NEXT_PUBLIC_SITE_URL` to the deployed origin.
+4. Deploy, then **submit the form once yourself** and confirm the email lands.
+5. Optional: verify a sending domain in Resend and set `CONTACT_FROM`.
 
-1. **Check Gmail Settings:**
-   - Ensure 2FA is enabled on your Gmail account
-   - Verify the app password is correct
-   - Make sure "Less secure app access" is disabled
+## Next.js on Workers
 
-2. **Check Vercel Logs:**
-   - Go to your deployment
-   - Click "View Function Logs"
-   - Look for SMTP errors
+A Next.js app does not run on Workers unmodified — it needs an adapter
+(`@opennextjs/cloudflare`, or `vinext`, which Cloudflare now recommends). That
+is **not yet set up in this repo**: there is no `wrangler.jsonc` and no adapter
+dependency. The contact form is now Workers-compatible, but the deployment
+pipeline still has to be added.
 
-3. **Test Locally:**
-   - Run `npm run dev`
-   - Test the contact form
-   - Check console for errors
+## If email breaks
 
-### 📱 Fallback Contact Methods:
+Check the Worker logs with `npx wrangler tail`. The route logs the full enquiry
+whenever delivery fails, so a lead is recoverable from the tail even if the
+email never sends.
 
-If email fails, users will see:
-- Your phone number: +254 110 018 735
-- Your email: mskmumo@gmail.com
-- WhatsApp button (already implemented)
-
-### 🔒 Security Notes:
-
-- Environment variables are encrypted in Vercel
-- Never commit `.env.local` to Git
-- Use `.env.example` for team members
-- Rotate app passwords regularly
+Visitors always see a fallback with the direct email and WhatsApp number, and
+the floating WhatsApp button does not depend on the API at all.

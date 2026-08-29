@@ -27,8 +27,16 @@ export const contactSchema = z.object({
   email: z.string().trim().email("Please enter a valid email address"),
   organisation: z.string().trim().max(120).optional().or(z.literal("")),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
-  projectType: z.enum(PROJECT_TYPES).optional().or(z.literal("")),
-  budget: z.enum(BUDGET_RANGES).optional().or(z.literal("")),
+  /*
+   * Deliberately not z.enum(...). These are informational fields for the
+   * inbox, not security boundaries, and a strict enum turns any mismatch —
+   * a mangled en-dash in "KES 150,000 – 500,000", a stale cached page after
+   * the labels are reworded, an autofill extension — into a rejected
+   * enquiry with a generic error. Losing a real lead costs far more than
+   * accepting an unexpected string here.
+   */
+  projectType: z.string().trim().max(120).optional().or(z.literal("")),
+  budget: z.string().trim().max(120).optional().or(z.literal("")),
   timeline: z.string().trim().max(120).optional().or(z.literal("")),
   referral: z.string().trim().max(160).optional().or(z.literal("")),
   message: z
