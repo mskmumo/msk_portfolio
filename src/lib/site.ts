@@ -40,7 +40,7 @@ export const site = {
 
   /** Supporting pitch, used under the H1 and in meta descriptions. */
   pitch:
-    "Full-stack developer in Nairobi shipping production systems for Kenyan businesses — procurement, accounting, healthcare — in Next.js, Laravel and TypeScript, with M-Pesa where money changes hands. I work as a data analyst too, which is why the systems I build are designed to be reported on from day one.",
+    "Full-stack developer in Nairobi shipping production systems for businesses in procurement, accounting and healthcare. React or Vue on the front, Node, Laravel or FastAPI behind it, checkout and payments wired end to end. I work as a data analyst too — which is why everything I build is designed to be reported on from day one.",
 
   metaDescription:
     "Mumo Mwangangi is a full-stack developer and data analyst in Nairobi, Kenya. Live client systems in procurement, accounting and healthcare built on Next.js and Laravel with M-Pesa integration, plus Power BI analytics including a board-level dashboard adopted by HR at Strathmore University.",
@@ -130,10 +130,10 @@ export const offers: Offer[] = [
     name: "Web systems & integrations",
     promise: "The operational system underneath the reporting.",
     description:
-      "Full-stack applications in Next.js and Laravel for the workflows your organisation runs on — quotes, bookings, records, approvals — including M-Pesa payment integration and the APIs that connect to what you already use. Three of these are live and linked below.",
+      "Full-stack applications for the workflows your organisation runs on — quotes, bookings, records, approvals — with checkout and payments wired end to end and APIs into whatever you already use. Three of these are live and linked below.",
     deliverables: [
-      "Application built front to back, Next.js or Laravel",
-      "M-Pesa (Daraja) payment integration and reconciliation",
+      "Application built front to back — React, Vue, Laravel or FastAPI",
+      "Checkout and payment integration, M-Pesa Daraja included, reconciled to the order",
       "Role-based access for staff and clients",
       "REST APIs and third-party integrations",
       "Deployment, documentation and source handover",
@@ -205,40 +205,50 @@ export const engagementProcess = [
  */
 export const capabilities = [
   {
-    group: "Languages",
-    items: ["TypeScript", "JavaScript", "PHP", "Java", "SQL", "DAX"],
+    group: "Frontend",
+    claim: "Interfaces nobody needs training to use.",
+    items: [
+      "React",
+      "Next.js",
+      "Vue",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Native",
+    ],
   },
   {
-    group: "Frameworks & platforms",
+    group: "Backend & APIs",
+    claim: "Services that still make sense six months later.",
     items: [
-      "Next.js / React",
-      "Laravel",
-      "Tailwind CSS",
+      "Node.js / Express",
+      "Laravel (PHP)",
+      "FastAPI (Python)",
+      "Java",
       "REST APIs",
-      "Vercel",
-      "Cloudflare Workers",
+      "Supabase / Firebase",
     ],
   },
   {
     group: "Data & BI",
+    claim: "One number, one meaning, in every report.",
     items: [
-      "Power BI",
-      "Power Query",
-      "Data modelling",
       "PostgreSQL",
-      "MySQL / InnoDB",
+      "MySQL",
+      "SQL",
+      "Power BI",
+      "DAX",
       "ETL & warehousing",
     ],
   },
   {
-    group: "Delivery",
+    group: "Payments & platform",
+    claim: "Money in, reconciled, and auditable.",
     items: [
+      "Checkout & payment integration",
       "M-Pesa Daraja",
-      "Stakeholder requirements",
-      "Agile & OOAD",
-      "Technical documentation",
+      "Vercel",
+      "Cloudflare Workers",
       "Git & GitHub",
-      "Illustrator / Canva",
     ],
   },
 ] as const;

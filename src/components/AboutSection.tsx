@@ -113,9 +113,14 @@ export function AboutSection() {
             <RevealGroup className="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2">
               {capabilities.map((group) => (
                 <RevealItem key={group.group}>
-                  <h3 className="border-b border-border pb-3 text-sm font-medium text-foreground">
+                  <h3 className="text-sm font-medium text-foreground">
                     {group.group}
                   </h3>
+                  {/* The claim carries the weight; the tags below are evidence
+                      for it. A bare list of frameworks reads as scatter. */}
+                  <p className="mt-1.5 border-b border-border pb-3 font-display text-[1.0625rem] leading-snug text-primary">
+                    {group.claim}
+                  </p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {group.items.map((item) => (
                       <li key={item} className="tag">
