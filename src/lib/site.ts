@@ -56,7 +56,7 @@ export const site = {
    * workers.dev belongs to Cloudflare, so there is no DNS zone to add a TXT
    * record to. Use a URL-prefix property with this tag instead.
    */
-  googleSiteVerification: "",
+  googleSiteVerification: "x47y_N4DND7sdtdBjfnMz4Qcum6_0XJrYJ6OX9jg4H8",
 
   email: "mskmumo@gmail.com",
   altEmail: "mumo.mwangangi@strathmore.edu",
