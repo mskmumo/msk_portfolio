@@ -10,6 +10,8 @@ export const contentType = "image/png";
  * or WhatsApp rendered as a bare URL — the cheapest marketing surface on the
  * site was blank.
  */
+const [headline, tail] = site.positioning.split(/\s+—\s+/);
+
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -60,12 +62,10 @@ export default function OpengraphImage() {
               maxWidth: 1060,
             }}
           >
-            <div style={{ color: "#101211" }}>
-              I build the systems that produce your data
-            </div>
-            <div style={{ color: "#0b5d42" }}>
-              — and the dashboards that decide on it.
-            </div>
+            {/* Split from site.positioning rather than retyped — the previous
+                hardcoded copy silently went stale when the pitch changed. */}
+            <div style={{ color: "#101211" }}>{headline}</div>
+            <div style={{ color: "#0b5d42" }}>{`— ${tail}`}</div>
           </div>
           <div
             style={{
@@ -75,7 +75,7 @@ export default function OpengraphImage() {
               maxWidth: 880,
             }}
           >
-            Power BI · DAX · Laravel · M-Pesa integration
+            React · Next.js · Laravel · FastAPI · Power BI
           </div>
         </div>
 

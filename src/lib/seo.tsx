@@ -3,8 +3,14 @@ import { site } from "@/lib/site";
 
 export { site };
 
+/*
+ * A static file, not a route. `next/og` drags Satori and a font parser (~1.4MB)
+ * into the Worker bundle, and that cost is paid on every cold start — which is
+ * what was producing Cloudflare Error 1102. The card never changes between
+ * deploys, so it is generated at build time instead: see scripts/README.md.
+ */
 const ogImage = {
-  url: "/opengraph-image",
+  url: "/og.png",
   width: 1200,
   height: 630,
   alt: `${site.name} — ${site.role}`,
