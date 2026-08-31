@@ -38,10 +38,10 @@ export function Hero() {
               {...rise(0.06)}
               className="display-xl mt-7 text-foreground balance"
             >
-              I build the systems that produce your data
+              I build the systems businesses run on
               <span className="text-muted"> — </span>
-              and the dashboards that{" "}
-              <em className="italic text-primary">decide</em> on it.
+              and the analytics that{" "}
+              <em className="italic text-primary">explain</em> them.
             </motion.h1>
 
             <motion.p {...rise(0.14)} className="lede mt-7 pretty">

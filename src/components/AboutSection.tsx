@@ -62,22 +62,22 @@ export function AboutSection() {
                 numbers go wrong before they ever reach a chart.
               </p>
               <p className="pretty">
-                I am a Business Information Technology student at Strathmore
-                University, third year on the evening programme, and I have been
-                building since 2023. In January 2025 I joined the Office of
-                Faculty Affairs as their data analytics intern, where I own the
-                BI layer for the Staff Establishment System — the Power BI
-                dashboard HR uses to see staffing across every faculty. It is
-                the work I am proudest of, largely because people who are not me
-                open it on purpose.
+                I build for clients: a national procurement and supply company,
+                an ICPAK-registered accounting firm, and DrugList — my own
+                platform connecting patients, chemists, hospitals, suppliers and
+                insurers across Kenyan healthcare. All three are live and linked
+                from the work above, so you can check them rather than take my
+                word for it.
               </p>
               <p className="pretty">
-                Alongside that I build for clients. A national procurement and
-                supply company, an ICPAK-registered accounting firm, and
-                DrugList — my own platform connecting patients, chemists,
-                hospitals, suppliers and insurers across Kenyan healthcare. All
-                three are live and linked from the work above, so you can check
-                them rather than take my word for it.
+                I am also a working data analyst. Since January 2025 I have been
+                with Strathmore University&apos;s Office of Faculty Affairs,
+                where I own the BI layer for the Staff Establishment System —
+                the Power BI dashboard HR uses to see staffing across every
+                faculty. It is the work I am proudest of, largely because people
+                who are not me open it on purpose. Alongside that I am in my
+                third year of a BSc in Business Information Technology, on the
+                evening programme.
               </p>
               <p className="pretty">
                 Next.js and TypeScript on the front, Laravel or PHP behind it,

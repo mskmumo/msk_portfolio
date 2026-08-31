@@ -17,7 +17,7 @@ export function Services() {
       tone="recessed"
       eyebrow="02 — How I can help"
       title="Three things I do properly"
-      lede="Most engagements start in one of these and end up touching another — the data is rarely clean enough for the dashboard you actually wanted."
+      lede="Most engagements start in one of these and end up touching another — a system worth building is worth reporting on, and the data underneath is rarely as clean as anyone hoped."
     >
       <RevealGroup className="grid gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-3">
         {offers.map((offer, i) => (

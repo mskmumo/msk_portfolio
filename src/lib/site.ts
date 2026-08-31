@@ -17,20 +17,25 @@ export const site = {
   url: fallbackUrl.replace(/\/$/, ""),
   name: "Mumo Mwangangi",
   shortName: "Mumo",
-  role: "Business Intelligence Developer & Full-Stack Engineer",
+  /*
+   * Title names both, Data Analyst first — that is the employed profession and
+   * the term recruiters search. The site itself leads with the build work,
+   * because its job is winning client projects.
+   */
+  role: "Data Analyst | Full-Stack Developer",
   location: "Nairobi, Kenya",
   locale: "en_KE",
 
   /** The one sentence the whole site has to earn. */
   positioning:
-    "I build the systems that produce your data — and the dashboards that decide on it.",
+    "I build the systems businesses run on — and the analytics that explain them.",
 
   /** Supporting pitch, used under the H1 and in meta descriptions. */
   pitch:
-    "Full-stack engineer and BI developer in Nairobi, working across Next.js, Laravel, Java and SQL. I ship live systems for Kenyan businesses — procurement, accounting, healthcare — and the Power BI layer that tells them what those systems are saying.",
+    "Full-stack developer in Nairobi shipping production systems for Kenyan businesses — procurement, accounting, healthcare — in Next.js, Laravel and TypeScript, with M-Pesa where money changes hands. I work as a data analyst too, which is why the systems I build are designed to be reported on from day one.",
 
   metaDescription:
-    "Mumo Mwangangi is a full-stack developer and BI engineer in Nairobi, Kenya. Live client work in procurement, accounting and healthcare on Next.js and Laravel, M-Pesa payment integration, and a board-level staff analytics dashboard adopted by HR at Strathmore University.",
+    "Mumo Mwangangi is a full-stack developer and data analyst in Nairobi, Kenya. Live client systems in procurement, accounting and healthcare built on Next.js and Laravel with M-Pesa integration, plus Power BI analytics including a board-level dashboard adopted by HR at Strathmore University.",
 
   email: "mskmumo@gmail.com",
   altEmail: "mumo.mwangangi@strathmore.edu",
@@ -100,22 +105,6 @@ export type Offer = {
  */
 export const offers: Offer[] = [
   {
-    id: "bi",
-    name: "Decision dashboards",
-    promise: "Power BI that a leadership team actually opens on Monday.",
-    description:
-      "I model your data properly, write the DAX behind the numbers, and design the report around the decisions you need to make — not around every column in the source.",
-    deliverables: [
-      "Data model built for the questions you ask",
-      "DAX measures and calculated KPIs",
-      "Executive report with drill-through",
-      "Scheduled refresh from your live source",
-      "Documentation and handover",
-    ],
-    fitFor:
-      "You have data in spreadsheets or a database and no single view of what it is telling you.",
-  },
-  {
     id: "systems",
     name: "Web systems & integrations",
     promise: "The operational system underneath the reporting.",
@@ -130,6 +119,22 @@ export const offers: Offer[] = [
     ],
     fitFor:
       "A process is running on WhatsApp, paper or a spreadsheet and needs to become a system.",
+  },
+  {
+    id: "bi",
+    name: "Decision dashboards",
+    promise: "Power BI that a leadership team actually opens on Monday.",
+    description:
+      "I model your data properly, write the DAX behind the numbers, and design the report around the decisions you need to make — not around every column in the source.",
+    deliverables: [
+      "Data model built for the questions you ask",
+      "DAX measures and calculated KPIs",
+      "Executive report with drill-through",
+      "Scheduled refresh from your live source",
+      "Documentation and handover",
+    ],
+    fitFor:
+      "You have data in spreadsheets or a database and no single view of what it is telling you.",
   },
   {
     id: "data",

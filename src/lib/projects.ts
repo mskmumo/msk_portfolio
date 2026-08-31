@@ -41,50 +41,6 @@ export type Project = {
 
 const data: Project[] = [
   {
-    slug: "staff-establishment-intelligence",
-    title: "Staff Establishment Intelligence",
-    tagline: "The board-level view of who staffs the university, and where the gaps are.",
-    status: "Production",
-    client: "Strathmore University — Office of Faculty Affairs",
-    period: "Jan 2025 — Present",
-    role: "BI developer — data model, DAX, report design, stakeholder requirements",
-    discipline: ["Business Intelligence", "Data modelling"],
-    summary:
-      "A Power BI system that gives HR a single, reconciled view of staffing across faculties — headcount against establishment, staff-to-student ratios and compliance positions — replacing a reporting pack that was rebuilt by hand for every request.",
-    motif: "bars",
-    coverImage: "/images/projects/powerbi_1.jpg",
-    gallery: [
-      {
-        src: "/images/projects/powerbi_1.jpg",
-        alt: "Staff establishment dashboard overview",
-        caption: "Executive view — establishment against actual headcount by faculty.",
-      },
-      {
-        src: "/images/projects/powerbi_2.jpg",
-        alt: "Staffing ratio and recruitment gap analysis",
-        caption: "Drill-through: staff-to-student ratios and open recruitment positions.",
-      },
-    ],
-    outcomes: [
-      { value: "40%", label: "Manual reporting workload removed" },
-      { value: "Adopted", label: "By HR as the board-level view" },
-      { value: "1", label: "Reconciled headcount source" },
-    ],
-    problem:
-      "The Office of Faculty Affairs had to answer questions about staffing levels, staff-to-student ratios and compliance across every faculty — but the underlying numbers lived in separate spreadsheets and system exports that did not agree with each other. Every leadership question meant rebuilding a report by hand, and every rebuild was a chance for two versions of the same figure to end up in the same room.",
-    approach: [
-      "Started with the decisions, not the data: sat with HR stakeholders to turn workforce-planning questions into a defined set of measures before modelling anything.",
-      "Cleaned and integrated the source datasets so that headcount reconciles to the same number regardless of which report you open.",
-      "Built the data model and wrote the DAX behind staffing levels, staff-to-student ratios and recruitment gaps.",
-      "Designed the report for a board audience — the position first, the detail behind a drill-through, nothing on the front page that does not change a decision.",
-      "Automated the KPIs so the pack refreshes on a schedule instead of being reassembled each cycle.",
-    ],
-    result:
-      "The dashboard was adopted by HR as the board-level view of the staff establishment, and cut roughly 40% of the manual reporting workload. Faculty-level workforce planning now runs off it directly, and the recurring argument about whose headcount number was correct went away with the second source.",
-    stack: ["Power BI", "DAX", "Power Query", "SQL", "Excel"],
-    featured: true,
-  },
-  {
     slug: "druglist-medicine-marketplace",
     title: "DrugList",
     tagline:
@@ -193,6 +149,50 @@ const data: Project[] = [
       "The firm now has tools that attract visitors with a live tax question, and a booking path for the ones ready to talk.",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Vercel"],
     links: { demo: "https://www.mateliassociates.com/" },
+    featured: true,
+  },
+  {
+    slug: "staff-establishment-intelligence",
+    title: "Staff Establishment Intelligence",
+    tagline: "The board-level view of who staffs the university, and where the gaps are.",
+    status: "Production",
+    client: "Strathmore University — Office of Faculty Affairs",
+    period: "Jan 2025 — Present",
+    role: "BI developer — data model, DAX, report design, stakeholder requirements",
+    discipline: ["Business Intelligence", "Data modelling"],
+    summary:
+      "A Power BI system that gives HR a single, reconciled view of staffing across faculties — headcount against establishment, staff-to-student ratios and compliance positions — replacing a reporting pack that was rebuilt by hand for every request.",
+    motif: "bars",
+    coverImage: "/images/projects/powerbi_1.jpg",
+    gallery: [
+      {
+        src: "/images/projects/powerbi_1.jpg",
+        alt: "Staff establishment dashboard overview",
+        caption: "Executive view — establishment against actual headcount by faculty.",
+      },
+      {
+        src: "/images/projects/powerbi_2.jpg",
+        alt: "Staffing ratio and recruitment gap analysis",
+        caption: "Drill-through: staff-to-student ratios and open recruitment positions.",
+      },
+    ],
+    outcomes: [
+      { value: "40%", label: "Manual reporting workload removed" },
+      { value: "Adopted", label: "By HR as the board-level view" },
+      { value: "1", label: "Reconciled headcount source" },
+    ],
+    problem:
+      "The Office of Faculty Affairs had to answer questions about staffing levels, staff-to-student ratios and compliance across every faculty — but the underlying numbers lived in separate spreadsheets and system exports that did not agree with each other. Every leadership question meant rebuilding a report by hand, and every rebuild was a chance for two versions of the same figure to end up in the same room.",
+    approach: [
+      "Started with the decisions, not the data: sat with HR stakeholders to turn workforce-planning questions into a defined set of measures before modelling anything.",
+      "Cleaned and integrated the source datasets so that headcount reconciles to the same number regardless of which report you open.",
+      "Built the data model and wrote the DAX behind staffing levels, staff-to-student ratios and recruitment gaps.",
+      "Designed the report for a board audience — the position first, the detail behind a drill-through, nothing on the front page that does not change a decision.",
+      "Automated the KPIs so the pack refreshes on a schedule instead of being reassembled each cycle.",
+    ],
+    result:
+      "The dashboard was adopted by HR as the board-level view of the staff establishment, and cut roughly 40% of the manual reporting workload. Faculty-level workforce planning now runs off it directly, and the recurring argument about whose headcount number was correct went away with the second source.",
+    stack: ["Power BI", "DAX", "Power Query", "SQL", "Excel"],
     featured: true,
   },
   {
