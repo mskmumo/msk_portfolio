@@ -49,6 +49,10 @@ export function defaultMetadata(): Metadata {
       description: site.metaDescription,
       images: [ogImage.url],
     },
+    // Renders <meta name="google-site-verification"> only once a token is set.
+    ...(site.googleSiteVerification
+      ? { verification: { google: site.googleSiteVerification } }
+      : {}),
     alternates: { canonical: "/" },
     robots: {
       index: true,

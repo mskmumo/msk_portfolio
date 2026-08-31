@@ -45,6 +45,19 @@ export const site = {
   metaDescription:
     "Mumo Mwangangi is a full-stack developer and data analyst in Nairobi, Kenya. Live client systems in procurement, accounting and healthcare built on Next.js and Laravel with M-Pesa integration, plus Power BI analytics including a board-level dashboard adopted by HR at Strathmore University.",
 
+  /*
+   * Google Search Console HTML-tag verification.
+   *
+   * Paste ONLY the content value from the tag Google shows, e.g. for
+   *   <meta name="google-site-verification" content="AbC123..." />
+   * put "AbC123..." here. Empty renders no tag at all.
+   *
+   * DNS ("Domain name provider") verification cannot work on this host:
+   * workers.dev belongs to Cloudflare, so there is no DNS zone to add a TXT
+   * record to. Use a URL-prefix property with this tag instead.
+   */
+  googleSiteVerification: "",
+
   email: "mskmumo@gmail.com",
   altEmail: "mumo.mwangangi@strathmore.edu",
   phone: "+254 110 018 735",
