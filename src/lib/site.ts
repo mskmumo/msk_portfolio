@@ -5,13 +5,21 @@
  * CV, it does not belong on the site — an inflated stat discounts the real ones.
  */
 
+/**
+ * The live origin. Change this only when a custom domain goes live.
+ *
+ * This must never fall back to localhost in a production build. The previous
+ * chain ended at "http://localhost:3000" after checking two VERCEL_* variables
+ * that do not exist on Cloudflare Workers — so every canonical, sitemap entry,
+ * og:url and JSON-LD @id on the deployed site pointed at localhost. Google
+ * reads such a canonical as "the real page is elsewhere", at a URL it cannot
+ * fetch, and drops the page from the index entirely.
+ */
+const PRODUCTION_URL = "https://msk-portfolio.mskmumo.workers.dev";
+
 const fallbackUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000");
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+  (process.env.NODE_ENV === "development" ? "http://localhost:3000" : PRODUCTION_URL);
 
 export const site = {
   url: fallbackUrl.replace(/\/$/, ""),

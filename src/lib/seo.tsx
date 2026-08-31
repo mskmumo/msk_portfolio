@@ -60,16 +60,18 @@ export function defaultMetadata(): Metadata {
 }
 
 /**
- * Person + the services offered. Google reads `knowsAbout` and `makesOffer`
- * for entity understanding, which is what makes a name query resolve to you
+ * Person + the services offered. Google reads `knowsAbout` and `sameAs` for
+ * entity understanding, which is what makes a name query resolve to you
  * rather than to a namesake.
  */
 export function personJsonLd() {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${site.url}/#person`,
     name: site.name,
+    // Variants people actually type. This is what binds a name query to the
+    // domain — "mumorealg" is the handle he uses across every social profile.
+    alternateName: ["Mumo", "mumorealg", "Mumo M. Mwangangi"],
     url: site.url,
     email: `mailto:${site.email}`,
     telephone: site.phone,
@@ -109,16 +111,22 @@ export function personJsonLd() {
       "Database design",
     ],
     knowsLanguage: ["en", "sw", "de"],
-    sameAs: [site.socials.linkedin, site.socials.github, site.socials.x],
+    // sameAs is the strongest signal that this site and those profiles are
+    // the same person. Every profile listed must actually exist.
+    sameAs: [
+      site.socials.linkedin,
+      site.socials.github,
+      site.socials.x,
+      site.socials.instagram,
+    ],
   } as const;
 }
 
 export function professionalServiceJsonLd() {
   return {
-    "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": `${site.url}/#service`,
-    name: `${site.name} — Business Intelligence & Web Systems`,
+    name: `${site.name} — Web Systems & Data Analytics`,
     url: site.url,
     description: site.pitch,
     provider: { "@id": `${site.url}/#person` },
@@ -127,23 +135,38 @@ export function professionalServiceJsonLd() {
       { "@type": "Place", name: "Remote, worldwide" },
     ],
     serviceType: [
+      "Full-stack web application development",
+      "Next.js and Laravel development",
+      "M-Pesa payment integration",
       "Power BI dashboard development",
       "Data modelling and ETL",
-      "Laravel web application development",
-      "M-Pesa payment integration",
     ],
   } as const;
 }
 
 export function websiteJsonLd() {
   return {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${site.url}/#website`,
     url: site.url,
     name: site.name,
+    description: site.metaDescription,
     publisher: { "@id": `${site.url}/#person` },
     inLanguage: "en",
+  } as const;
+}
+
+/**
+ * One @graph rather than three loose blocks.
+ *
+ * Separate scripts leave Google to infer that the Person, the service and the
+ * site are the same entity. A single graph with linked @ids states it, which
+ * is what a name query needs in order to resolve to this domain.
+ */
+export function siteGraphJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [personJsonLd(), professionalServiceJsonLd(), websiteJsonLd()],
   } as const;
 }
 
@@ -193,7 +216,11 @@ export function JsonLd({ data }: { data: object | object[] }) {
         <script
           key={i}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+          // Escaping "<" prevents a "</script>" inside any string value from
+          // closing the tag early and injecting markup.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(item).replace(/</g, "\\u003c"),
+          }}
         />
       ))}
     </>

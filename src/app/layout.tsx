@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { defaultMetadata, JsonLd, personJsonLd, professionalServiceJsonLd, websiteJsonLd } from "@/lib/seo";
+import { defaultMetadata, JsonLd, siteGraphJsonLd } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,7 +57,7 @@ export default function RootLayout({
           <Header />
           <main id="content">{children}</main>
           <Footer />
-          <JsonLd data={[websiteJsonLd(), personJsonLd(), professionalServiceJsonLd()]} />
+          <JsonLd data={siteGraphJsonLd()} />
         </ThemeProvider>
       </body>
     </html>
