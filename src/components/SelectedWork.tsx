@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProjectCover } from "@/components/ui/ProjectCover";
-import { getAllProjects, type Project } from "@/lib/projects";
+import { getFeaturedProjects, type Project } from "@/lib/projects";
 
 /**
  * A list, not a carousel. A carousel hides three quarters of the proof behind
@@ -10,17 +10,19 @@ import { getAllProjects, type Project } from "@/lib/projects";
  * is visible without interaction.
  */
 export function SelectedWork() {
-  const projects = getAllProjects();
+  // Featured only. Seven rows makes the homepage a scroll; the full set lives
+  // on /work, which the header action links to.
+  const projects = getFeaturedProjects();
 
   return (
     <Section
       id="work"
       eyebrow="01 — Selected work"
-      title="Four systems, and what they changed"
-      lede="Each one lists what I owned and what the result actually was. Where something is a prototype or a team build, it says so."
+      title="Systems people actually use"
+      lede="Live client sites, a healthcare marketplace and the BI system a university HR office runs on. Each one states what I owned — where something is a prototype or a team build, it says so."
       action={
         <Link href="/work" className="btn btn-secondary">
-          All case studies
+          All seven case studies
         </Link>
       }
     >
@@ -106,24 +108,52 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
             ))}
           </div>
 
-          <Link
-            href={`/work/${project.slug}`}
-            className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
-          >
-            Read the case study
-            <svg
-              className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.2,0.6,0.2,1)] group-hover:translate-x-1"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link
+              href={`/work/${project.slug}`}
+              className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
             >
-              <path d="M3 8h10M9 4l4 4-4 4" />
-            </svg>
-          </Link>
+              Read the case study
+              <svg
+                className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.2,0.6,0.2,1)] group-hover:translate-x-1"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </Link>
+
+            {/* Anything with a running URL gets a direct route to it — a
+                reader who can click through and check the claims is worth
+                more than one who takes the write-up on trust. */}
+            {project.links?.demo && (
+              <a
+                href={project.links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-opacity hover:opacity-70"
+              >
+                Visit the live site
+                <svg
+                  className="h-3.5 w-3.5"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M6 3h7v7M13 3 6.5 9.5M11 9.5V13H3V5h3.5" />
+                </svg>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </Reveal>

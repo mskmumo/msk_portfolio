@@ -200,6 +200,39 @@ export default async function CaseStudy({ params }: Params) {
             <aside className="lg:col-span-4">
               <Reveal delay={0.06} className="lg:sticky lg:top-28">
                 <div className="panel p-6">
+                  {/* A link to the running system is the strongest proof a
+                      case study can carry — the reader can check every claim
+                      above against the real thing. It goes first. */}
+                  {project.links?.demo && (
+                    <>
+                      <p className="eyebrow">See it running</p>
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary mt-4 w-full"
+                      >
+                        Visit the live site
+                        <svg
+                          className="h-4 w-4"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M6 3h7v7M13 3 6.5 9.5M11 9.5V13H3V5h3.5" />
+                        </svg>
+                      </a>
+                      <p className="mono-meta mt-3 break-all">
+                        {project.links.demo.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                      </p>
+                      <hr className="rule my-6" />
+                    </>
+                  )}
+
                   <p className="eyebrow">Built with</p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {project.stack.map((tech) => (

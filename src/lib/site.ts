@@ -27,10 +27,10 @@ export const site = {
 
   /** Supporting pitch, used under the H1 and in meta descriptions. */
   pitch:
-    "Business intelligence and full-stack engineering for organisations in Kenya and beyond. Power BI and DAX for the decisions, Laravel and modern web for the systems underneath.",
+    "Full-stack engineer and BI developer in Nairobi, working across Next.js, Laravel, Java and SQL. I ship live systems for Kenyan businesses — procurement, accounting, healthcare — and the Power BI layer that tells them what those systems are saying.",
 
   metaDescription:
-    "Mumo Mwangangi builds Power BI dashboards and the Laravel systems that feed them — including a board-level staff analytics dashboard adopted by HR at Strathmore University. Available for BI, web systems and M-Pesa integration work from Nairobi, Kenya.",
+    "Mumo Mwangangi is a full-stack developer and BI engineer in Nairobi, Kenya. Live client work in procurement, accounting and healthcare on Next.js and Laravel, M-Pesa payment integration, and a board-level staff analytics dashboard adopted by HR at Strathmore University.",
 
   email: "mskmumo@gmail.com",
   altEmail: "mumo.mwangangi@strathmore.edu",
@@ -65,14 +65,14 @@ export const proofPoints = [
     note: "Board-level HR dashboard, Strathmore University",
   },
   {
-    value: "4",
+    value: "7",
     label: "Production systems shipped",
-    note: "BI, payments, credentialing, mobile",
+    note: "BI, healthcare, procurement, finance, payments",
   },
   {
-    value: "2023",
-    label: "Building since",
-    note: "Web systems and analytics, Nairobi",
+    value: "3",
+    label: "Live client sites",
+    note: "Procurement, accounting, healthcare — all public",
   },
   {
     value: "Distinction",
@@ -80,6 +80,10 @@ export const proofPoints = [
     note: "Strathmore University, 2024",
   },
 ] as const;
+// Kept to exactly four — the hero strip is a four-column grid, and a fifth
+// item orphans a cell. "Building since 2023" was dropped rather than one of
+// these: a start date is not an achievement, and "7 systems shipped" already
+// carries the same information with more weight.
 
 export type Offer = {
   id: string;
@@ -116,13 +120,13 @@ export const offers: Offer[] = [
     name: "Web systems & integrations",
     promise: "The operational system underneath the reporting.",
     description:
-      "Full-stack Laravel applications for the workflows your organisation runs on — bookings, records, approvals — including M-Pesa payment integration and the APIs that connect to what you already use.",
+      "Full-stack applications in Next.js and Laravel for the workflows your organisation runs on — quotes, bookings, records, approvals — including M-Pesa payment integration and the APIs that connect to what you already use. Three of these are live and linked below.",
     deliverables: [
-      "Laravel application, front to back",
-      "M-Pesa (Daraja) payment integration",
+      "Application built front to back, Next.js or Laravel",
+      "M-Pesa (Daraja) payment integration and reconciliation",
       "Role-based access for staff and clients",
       "REST APIs and third-party integrations",
-      "Deployment and source handover",
+      "Deployment, documentation and source handover",
     ],
     fitFor:
       "A process is running on WhatsApp, paper or a spreadsheet and needs to become a system.",
@@ -175,52 +179,68 @@ export const engagementProcess = [
  */
 export const capabilities = [
   {
-    group: "Business intelligence",
+    group: "Languages",
+    items: ["TypeScript", "JavaScript", "PHP", "Java", "SQL", "DAX"],
+  },
+  {
+    group: "Frameworks & platforms",
+    items: [
+      "Next.js / React",
+      "Laravel",
+      "Tailwind CSS",
+      "REST APIs",
+      "Vercel",
+      "Cloudflare Workers",
+    ],
+  },
+  {
+    group: "Data & BI",
     items: [
       "Power BI",
-      "DAX",
       "Power Query",
       "Data modelling",
-      "KPI design",
-      "Data storytelling",
-    ],
-  },
-  {
-    group: "Data engineering",
-    items: [
-      "SQL",
       "PostgreSQL",
       "MySQL / InnoDB",
-      "ETL & integration",
-      "Data cleaning",
-      "Warehousing & ERD",
+      "ETL & warehousing",
     ],
   },
   {
-    group: "Software engineering",
+    group: "Delivery",
     items: [
-      "Laravel (PHP)",
-      "Java",
-      "JavaScript",
-      "React / Next.js",
-      "REST APIs",
       "M-Pesa Daraja",
-    ],
-  },
-  {
-    group: "Working practice",
-    items: [
       "Stakeholder requirements",
       "Agile & OOAD",
       "Technical documentation",
-      "Presentation & training",
-      "Adobe Illustrator / Canva",
       "Git & GitHub",
+      "Illustrator / Canva",
     ],
   },
 ] as const;
 
 export const experience = [
+  {
+    role: "Full-Stack Developer — Independent Client Work",
+    org: "Clients in Nairobi and remote",
+    period: "2025 — Present",
+    location: "Nairobi, Kenya",
+    summary:
+      "Design, build and ship production web systems for Kenyan businesses, front to back.",
+    points: [
+      "Delivered live sites for a national procurement and supply company and an ICPAK-registered accounting firm, each built solo from design through deployment",
+      "Built DrugList, a medicine ordering and supply platform connecting patients, chemists, hospitals, suppliers and insurers across Kenyan healthcare",
+      "Integrated M-Pesa Daraja payments, alongside insurance as a second payment path, with reconciliation against the originating order",
+      "Modelled the relational schema and reporting layer behind each application",
+      "Ran each engagement end to end: requirements, build, deployment and handover",
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Laravel",
+      "PostgreSQL",
+      "M-Pesa Daraja",
+      "Tailwind CSS",
+    ],
+  },
   {
     role: "Data Analytics Intern",
     org: "Strathmore University — Office of Faculty Affairs",

@@ -85,6 +85,111 @@ const data: Project[] = [
     featured: true,
   },
   {
+    slug: "druglist-medicine-marketplace",
+    title: "DrugList",
+    tagline:
+      "Medicine ordering and supply, connecting seven kinds of participant across Kenyan healthcare.",
+    status: "Production",
+    period: "2025 — Present",
+    role: "Founder and full-stack developer — led the build with a small team",
+    discipline: ["Full-stack", "Marketplace", "Payments"],
+    summary:
+      "A platform connecting patients, doctors, hospitals, chemists, pharmacies, suppliers and insurers: patients order prescription medicine from chemists that actually have it in stock, institutions source in bulk from verified suppliers, and payment runs on M-Pesa or insurance.",
+    motif: "flow",
+    outcomes: [
+      { value: "7", label: "Participant types on one platform" },
+      { value: "M-Pesa + insurance", label: "Two payment rails, both first-class" },
+      { value: "Live", label: "In production" },
+    ],
+    problem:
+      "Finding a specific prescription medicine in Kenya means ringing round chemists one at a time asking who has it in stock. Institutions buying in bulk have the same problem at a larger scale, with no reliable way to tell which suppliers have been verified. And when the medicine is finally found, paying for it — especially through insurance — happens off-system, so nothing is recorded against the order.",
+    approach: [
+      "Modelled the domain around stock rather than catalogue: a listing only matters if the chemist showing it actually holds the item.",
+      "Built a separate flow for each participant — patients and doctors ordering, chemists and pharmacies fulfilling, suppliers listing bulk stock, hospitals and insurers on the institutional side.",
+      "Treated M-Pesa and insurance as first-class payment paths rather than an afterthought, because between them they are how medicine actually gets paid for here.",
+      "Added supplier verification so bulk buyers can tell who has been checked before committing to an order.",
+      "Shipped it as a Next.js application on Cloudflare with a relational backend behind it.",
+    ],
+    result:
+      "DrugList is live, with ordering, bulk sourcing and both payment rails working end to end.",
+    caveat:
+      "My own product rather than a client engagement, and built with a small team rather than alone. I led the build and own the architecture and the payment integration.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Laravel (PHP)",
+      "PostgreSQL",
+      "M-Pesa Daraja",
+      "Cloudflare",
+    ],
+    links: { demo: "https://www.drug-list.com/" },
+    featured: true,
+  },
+  {
+    slug: "bluevex-prime-procurement",
+    title: "Bluevex Prime Solutions",
+    tagline: "One procurement partner instead of forty supplier relationships.",
+    status: "Production",
+    client: "Bluevex Prime Solutions — Nairobi, Kenya",
+    period: "2025 — 2026",
+    role: "Full-stack developer — sole build, design through deployment",
+    discipline: ["Full-stack", "Client delivery"],
+    summary:
+      "A site for an integrated procurement and supply company serving organisations across all 47 Kenyan counties: eight solution areas, ten sectors, and a structured quote-request flow that replaces scattered email threads.",
+    motif: "grid",
+    outcomes: [
+      { value: "8", label: "Solution areas, each with its own page" },
+      { value: "10", label: "Sectors addressed in their own terms" },
+      { value: "Quote intake", label: "Structured requests, not email threads" },
+    ],
+    problem:
+      "Bluevex sells across eight barely-related categories — office supplies, ICT, healthcare and laboratory, engineering, safety, agriculture, renewable energy, branding — into ten sectors with little in common. One generic company page cannot speak to a hospital procurement officer and a county engineer at the same time. Every enquiry also arrived as free-text email, so quoting began with a round of clarifying questions before anyone could price anything.",
+    approach: [
+      "Gave each solution area and each sector its own page, so a visitor lands on language written for their situation instead of a catch-all.",
+      "Replaced free-text enquiries with a structured quote-request flow that captures the requirement in a shape the team can price directly.",
+      "Published the six-step procurement process — consultation through after-sales support — because in procurement the process is the product.",
+      "Built it as a statically prerendered Next.js site so pages load quickly on Kenyan mobile connections.",
+      "Put contact on every route: phone, email, WhatsApp and the form.",
+    ],
+    result:
+      "Bluevex has a site that addresses each sector in its own language, and enquiries now arrive structured enough to quote against without a preliminary round of questions.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Vercel"],
+    links: { demo: "https://www.bluevexprime.com/" },
+    featured: true,
+  },
+  {
+    slug: "mateli-associates-accounting",
+    title: "Mateli & Associates",
+    tagline: "An accounting firm that answers your tax question before you call.",
+    status: "Production",
+    client: "Mateli & Associates, Certified Public Accountants — Nairobi, Kenya",
+    period: "2025 — 2026",
+    role: "Full-stack developer — sole build, design through deployment",
+    discipline: ["Full-stack", "Client delivery"],
+    summary:
+      "A site for an ICPAK-registered accounting firm covering audit, tax and advisory across twelve sectors — built around a free PAYE calculator and KRA deadline tracker that give something away before anyone becomes a client.",
+    motif: "bars",
+    outcomes: [
+      { value: "2", label: "Free public tools: PAYE estimator, KRA deadlines" },
+      { value: "12", label: "Sectors addressed" },
+      { value: "Booking", label: "Consultations booked from the site" },
+    ],
+    problem:
+      "Accounting firms compete on trust, and a brochure site does nothing to earn it. Meanwhile most visitors arrive with one immediate question — what will PAYE cost me, when is this KRA deadline — and leave to answer it somewhere else, which is the last you see of them.",
+    approach: [
+      "Built the free tools first: a PAYE estimator and a KRA deadline tracker, both usable without contacting anyone.",
+      "Structured services around what clients ask for — audit, tax, eTIMS compliance, advisory — rather than around the firm's internal departments.",
+      "Added consultation booking, so the step after using a tool is one click instead of a phone call.",
+      "Gave twelve sectors their own treatment and published case studies and team credentials, because in this market credibility is the deciding factor.",
+      "Prerendered the whole site on Next.js for fast loads and clean indexing.",
+    ],
+    result:
+      "The firm now has tools that attract visitors with a live tax question, and a booking path for the ones ready to talk.",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Vercel"],
+    links: { demo: "https://www.mateliassociates.com/" },
+    featured: true,
+  },
+  {
     slug: "rental-management-mpesa",
     title: "Rental Management & M-Pesa Payments",
     tagline: "Bookings and rent in one system, with every payment tied to a tenancy.",
@@ -111,7 +216,7 @@ const data: Project[] = [
     result:
       "Bookings and payments run in a single system, and each transaction lands against the right tenancy without anyone matching SMS to spreadsheets. The payment history per unit became something a landlord can open rather than reassemble.",
     stack: ["Laravel", "PHP", "MySQL", "M-Pesa Daraja API", "JavaScript"],
-    featured: true,
+    featured: false,
   },
   {
     slug: "blockchain-credential-verification",
@@ -142,7 +247,7 @@ const data: Project[] = [
     caveat:
       "A prototype, not a deployed system. It is here because the design problem — establishing trust without a central gatekeeper — is the part worth showing, and because the security model was reasoned through rather than hand-waved.",
     stack: ["Blockchain", "Web application", "Database design"],
-    featured: true,
+    featured: false,
   },
   {
     slug: "university-conference-app",

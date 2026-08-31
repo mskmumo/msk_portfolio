@@ -72,11 +72,18 @@ export function AboutSection() {
                 open it on purpose.
               </p>
               <p className="pretty">
-                Alongside that I build in Laravel: a rental system with M-Pesa
-                payments, a blockchain credential-verification prototype, and
-                internal tools for faculty workflows. Evening classes, daytime
-                work and the projects in between — the schedule is exactly why I
-                am strict about scope.
+                Alongside that I build for clients. A national procurement and
+                supply company, an ICPAK-registered accounting firm, and
+                DrugList — my own platform connecting patients, chemists,
+                hospitals, suppliers and insurers across Kenyan healthcare. All
+                three are live and linked from the work above, so you can check
+                them rather than take my word for it.
+              </p>
+              <p className="pretty">
+                Next.js and TypeScript on the front, Laravel or PHP behind it,
+                SQL underneath, and M-Pesa wherever money changes hands. Evening
+                classes, daytime work and client builds in between — the
+                schedule is exactly why I am strict about scope.
               </p>
             </div>
 

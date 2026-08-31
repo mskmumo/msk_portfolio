@@ -46,7 +46,7 @@ export default function WorkIndex() {
               The work, and what it changed
             </h1>
             <p className="lede mt-6 pretty">
-              Four systems built between 2023 and now. Each one states what I
+              Seven systems built between 2023 and now, including three live client sites. Each one states what I
               owned — where something is a prototype or a team build, it is
               labelled as one.
             </p>
