@@ -16,9 +16,12 @@ export function AboutSection() {
         <Reveal className="lg:col-span-5">
           <figure>
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border bg-background">
+              {/* Cropped from pic_1.jpg to a 4:5 portrait: in the original he
+                  fills about a fifth of the frame, which reads as a snapshot
+                  rather than an About photo. The original file is untouched. */}
               <Image
-                src="/pic_1.jpg"
-                alt={`${site.name} working in Nairobi`}
+                src="/about-portrait.jpg"
+                alt={`${site.name}, ${site.role}, in Nairobi`}
                 fill
                 sizes="(min-width: 1024px) 420px, 90vw"
                 className="object-cover"
