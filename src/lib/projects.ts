@@ -96,6 +96,7 @@ const data: Project[] = [
     summary:
       "A platform connecting patients, doctors, hospitals, chemists, pharmacies, suppliers and insurers: patients order prescription medicine from chemists that actually have it in stock, institutions source in bulk from verified suppliers, and payment runs on M-Pesa or insurance.",
     motif: "flow",
+    coverImage: "/images/projects/druglist.jpg",
     outcomes: [
       { value: "7", label: "Participant types on one platform" },
       { value: "M-Pesa + insurance", label: "Two payment rails, both first-class" },
@@ -108,6 +109,8 @@ const data: Project[] = [
       "Built a separate flow for each participant — patients and doctors ordering, chemists and pharmacies fulfilling, suppliers listing bulk stock, hospitals and insurers on the institutional side.",
       "Treated M-Pesa and insurance as first-class payment paths rather than an afterthought, because between them they are how medicine actually gets paid for here.",
       "Added supplier verification so bulk buyers can tell who has been checked before committing to an order.",
+      "Carried the credential-verification work through into prescriptions: a prescription is verified rather than taken on trust, which is the same trust problem as the blockchain project below, applied to a live product.",
+      "Built to the Kenya Data Protection Act 2019, since the platform handles prescription data.",
       "Shipped it as a Next.js application on Cloudflare with a relational backend behind it.",
     ],
     result:
@@ -120,6 +123,7 @@ const data: Project[] = [
       "Laravel (PHP)",
       "PostgreSQL",
       "M-Pesa Daraja",
+      "Blockchain verification",
       "Cloudflare",
     ],
     links: { demo: "https://www.drug-list.com/" },
@@ -137,6 +141,7 @@ const data: Project[] = [
     summary:
       "A site for an integrated procurement and supply company serving organisations across all 47 Kenyan counties: eight solution areas, ten sectors, and a structured quote-request flow that replaces scattered email threads.",
     motif: "grid",
+    coverImage: "/images/projects/bluevex-prime.jpg",
     outcomes: [
       { value: "8", label: "Solution areas, each with its own page" },
       { value: "10", label: "Sectors addressed in their own terms" },
@@ -169,6 +174,7 @@ const data: Project[] = [
     summary:
       "A site for an ICPAK-registered accounting firm covering audit, tax and advisory across twelve sectors — built around a free PAYE calculator and KRA deadline tracker that give something away before anyone becomes a client.",
     motif: "bars",
+    coverImage: "/images/projects/mateli-associates.jpg",
     outcomes: [
       { value: "2", label: "Free public tools: PAYE estimator, KRA deadlines" },
       { value: "12", label: "Sectors addressed" },
