@@ -316,7 +316,7 @@ export const education = [
     award: "BSc Business Information Technology",
     org: "Strathmore University",
     period: "2024 — Present",
-    detail: "Third year, evening programme",
+    detail: "Third year, four year programme",
   },
   {
     award: "Diploma in Business Information Technology",

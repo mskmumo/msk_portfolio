@@ -80,12 +80,12 @@ export function AboutSection() {
                 faculty. It is the work I am proudest of, largely because people
                 who are not me open it on purpose. Alongside that I am in my
                 third year of a BSc in Business Information Technology, on the
-                evening programme.
+                four year programme.
               </p>
               <p className="pretty">
                 Next.js and TypeScript on the front, Laravel or PHP behind it,
-                SQL underneath, and M-Pesa wherever money changes hands. Evening
-                classes, daytime work and client builds in between — the
+                SQL underneath, and M-Pesa wherever money changes hands. Classes,
+                daytime work and client builds in between — the
                 schedule is exactly why I am strict about scope.
               </p>
             </div>
