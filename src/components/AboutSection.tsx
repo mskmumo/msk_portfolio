@@ -79,7 +79,7 @@ export function AboutSection() {
                 the Power BI dashboard HR uses to see staffing across every
                 faculty. It is the work I am proudest of, largely because people
                 who are not me open it on purpose. Alongside that I am in my
-                third year of a BSc in Business Information Technology, on the
+                fourth year of a BSc in Business Information Technology, on the
                 four year programme.
               </p>
               <p className="pretty">
